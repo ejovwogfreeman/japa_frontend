@@ -50,7 +50,6 @@
 
 .dashboard-component .main {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 520px;
   padding: 20px;
   padding-right: 200px;
   overflow-y: scroll;
@@ -112,6 +111,41 @@
   display: block;
 }
 
-/* .profile-img{
+@media screen and (max-width: 1200px) {
+  .dashboard-component .main {
+    padding-right: 100px;
+  }
+  .dashboard-component .main .cards {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-} */
+@media screen and (max-width: 900px) {
+  .dashboard-component .main .charts {
+    display: block;
+  }
+  .dashboard-component .main .charts div {
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .dashboard-component .top {
+    padding-right: 5px;
+  }
+  .dashboard-component .main {
+    padding: 5px;
+    padding-right: 0px;
+  }
+  .dashboard-component .main .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .dashboard-component .main .charts {
+    display: none;
+  }
+  .dashboard-component .top h2 {
+    font-size: 20px;
+  }
+}

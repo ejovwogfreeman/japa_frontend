@@ -52,8 +52,12 @@ const Home = ({ user }) => {
           ))}
         </div>
         <div className="charts">
-          <BarChart />
-          <PieChart />
+          <div>
+            <BarChart />
+          </div>
+          <div>
+            <PieChart />
+          </div>
         </div>
         <div className="users">
           <h3>Users</h3>

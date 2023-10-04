@@ -17,3 +17,8 @@
   background-color: rgba(0, 0, 0, 0.1); /* Color of the scrollbar thumb */
   border-radius: 10px; /* Adjust the radius to match the track */
 }
+@media screen and (max-width: 700px) {
+  .main-component {
+    padding-left: 120px;
+  }
+}

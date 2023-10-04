@@ -17,7 +17,7 @@ const SideNav = () => {
   };
   return (
     <ul className="side-nav">
-      <img src={logo} alt="" width="140px" />
+      <img src={logo} alt="" />
       <a href="/">
         <AiOutlineHome />
         <span>Home</span>
