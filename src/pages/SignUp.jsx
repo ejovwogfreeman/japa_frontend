@@ -55,8 +55,8 @@ const SignUp = () => {
       console.log("User registered successfully:", response.data);
       navigate("/login");
     } catch (error) {
-      toast.error("AN ERROR OCCURRED");
-      console.error("Error registering user:", error);
+      toast.error(error.response.data.detail);
+      console.error("Error registering user:", error.response.data.detail);
     } finally {
       // Set loading state back to false regardless of success or error
       setIsLoading(false);
