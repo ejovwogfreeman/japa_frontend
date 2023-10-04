@@ -280,3 +280,28 @@
   background-color: rgba(0, 0, 255, 0.1);
   cursor: pointer;
 }
+
+@media screen and (max-width: 700px) {
+  .message-container {
+    display: block;
+  }
+  .message-container .left {
+    display: none;
+  }
+  .message-container .right {
+    display: none;
+  }
+  .message-container .center {
+    height: auto;
+  }
+  .message-container .center .top .top-left .text {
+    display: none;
+  }
+  .chats {
+    margin: 5px;
+    /* height: auto; */
+  }
+  .message-container .center form {
+    margin: 5px;
+  }
+}
