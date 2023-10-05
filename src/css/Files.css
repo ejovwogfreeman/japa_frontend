@@ -144,3 +144,9 @@
 .files-container .left .msg {
   font-size: 13px;
 }
+
+@media screen and (max-width: 800px) {
+  .files-container .right {
+    display: none;
+  }
+}
