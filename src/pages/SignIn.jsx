@@ -37,7 +37,7 @@ const SignIn = () => {
       formData.append("password", password);
 
       const response = await axios.post(
-        "http://test.sammykingx.tech/auth",
+        "https://japaconsults.sammykingx.tech/auth",
         formData
       );
 

@@ -47,7 +47,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://test.sammykingx.tech/user/register",
+        "https://japaconsults.sammykingx.tech/user/register",
         infoData
       );
 

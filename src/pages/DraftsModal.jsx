@@ -45,7 +45,7 @@ const DraftsModal = ({
       console.log(form);
       // Send the form data to your server
       const response = await axios.post(
-        "http://test.sammykingx.tech/drafts/save",
+        "https://japaconsults.sammykingx.tech/drafts/save",
         form,
         {
           headers: {

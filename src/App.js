@@ -28,10 +28,13 @@ const App = () => {
       headers.append("Authorization", `Bearer ${token_id}`);
 
       // Create the fetch request with the headers
-      const res = await fetch("http://test.sammykingx.tech/user/profile", {
-        method: "GET",
-        headers: headers,
-      });
+      const res = await fetch(
+        "https://japaconsults.sammykingx.tech/user/profile",
+        {
+          method: "GET",
+          headers: headers,
+        }
+      );
 
       const data = await res.json();
       setUser(data);

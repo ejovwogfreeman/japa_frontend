@@ -264,9 +264,12 @@ const Drafts = ({ token }) => {
   useEffect(() => {
     const getDrafts = async () => {
       try {
-        const res = await axios.get("http://test.sammykingx.tech/drafts/", {
-          headers,
-        });
+        const res = await axios.get(
+          "https://japaconsults.sammykingx.tech/drafts/",
+          {
+            headers,
+          }
+        );
 
         if (res.status === 200) {
           setDrafts(res.data);
