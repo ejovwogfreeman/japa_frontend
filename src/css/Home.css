@@ -141,6 +141,7 @@
   }
   .dashboard-component .main .cards {
     grid-template-columns: repeat(1, 1fr);
+    margin-right: 5px;
   }
   .dashboard-component .main .charts {
     display: none;
