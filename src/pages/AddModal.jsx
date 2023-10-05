@@ -77,14 +77,7 @@ const AddModal = ({ handleShowAddModal, token }) => {
         </div>
         <div>
           <label htmlFor="content">Draft Content</label>
-          <div
-            style={{
-              border: "1px solid rgba(0,0,0,0.05)",
-              padding: "10px",
-              height: "300px",
-              marginTop: "10px",
-            }}
-          >
+          <div className="editor">
             <Editor
               editorState={editorState}
               wrapperClassName="demo-wrapper"
