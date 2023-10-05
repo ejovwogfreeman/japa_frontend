@@ -281,6 +281,22 @@
   cursor: pointer;
 }
 
+.draft-icon {
+  font-size: 15px;
+  cursor: pointer;
+  display: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  width: 120px;
+  margin: 0px 0px 5px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.draft-icon svg {
+  font-size: 22px;
+}
+
 @media screen and (max-width: 1200px) {
   .message-container .right {
     display: none;
@@ -291,10 +307,16 @@
 }
 
 @media screen and (max-width: 700px) {
+  .draft-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .message-container .left {
     min-width: 70px;
     justify-content: center;
-    /* text-align: center; */
+    display: none;
   }
   .message-container .left img {
     margin: auto;

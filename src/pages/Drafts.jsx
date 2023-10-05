@@ -238,7 +238,7 @@
 
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import "../css/Messages.css";
+import "../css/Drafts.css";
 import img from "../images/gb-profile.png";
 import { IoCreateOutline, IoAddCircleOutline } from "react-icons/io5";
 import Search from "../components/Search";
@@ -247,6 +247,8 @@ import UpdateModal from "./UpdateModal";
 import { BsTrash } from "react-icons/bs";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { RiDraftLine } from "react-icons/ri";
+import DraftsModal from "./DraftsModal";
 // import { useNavigate } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
@@ -301,12 +303,15 @@ const Drafts = ({ token }) => {
   };
 
   // Function to handle draft selection
-  const handleDraftSelection = (draft) => {
-    setSelectedDraft(draft);
-  };
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDrafts, setShowDrafts] = useState(false);
+
+  const handleDraftSelection = (draft) => {
+    setSelectedDraft(draft);
+    setShowDrafts(false);
+  };
 
   const handleShowAddModal = () => {
     setShowAddModal(!showAddModal);
@@ -319,10 +324,22 @@ const Drafts = ({ token }) => {
     setShowUpdateModal(!showUpdateModal);
   };
 
+  const handleShowDrafts = () => {
+    setShowDrafts(!showDrafts);
+  };
+
   return (
     <div className="message-container">
       {showAddModal && (
         <AddModal handleShowAddModal={handleShowAddModal} token={token} />
+      )}
+      {showDrafts && (
+        <DraftsModal
+          handleShowDrafts={handleShowDrafts}
+          handleDraftSelection={handleDraftSelection}
+          token={token}
+          drafts={drafts}
+        />
       )}
       {showUpdateModal && (
         <>
@@ -417,17 +434,26 @@ const Drafts = ({ token }) => {
               </small>
             </div>
           ) : (
-            <div
-              className="receiver-color"
-              style={{
-                padding: "10px",
-                paddingTop: "30px",
-                paddingBottom: "30px",
-                position: "relative",
-              }}
-            >
-              Please select a draft
-            </div>
+            <>
+              <span className="draft-icon" onClick={handleShowDrafts}>
+                <RiDraftLine />
+                <span>ALL DRAFTS</span>
+              </span>
+              <div
+                className="receiver-color"
+                style={{
+                  padding: "10px",
+                  paddingTop: "30px",
+                  paddingBottom: "30px",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <span>Please select a draft</span>
+              </div>
+            </>
           )}
         </div>
       </div>

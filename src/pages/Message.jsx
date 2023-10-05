@@ -259,10 +259,10 @@ const Message = ({ token }) => {
               <span>online</span>
             </div>
           </div>
-          <div className="top-right">
+          {/* <div className="top-right">
             <IoCallOutline />
             <HiOutlineVideoCamera />
-          </div>
+          </div> */}
         </div>
         <div className="chats">
           {chats.map((x) => (

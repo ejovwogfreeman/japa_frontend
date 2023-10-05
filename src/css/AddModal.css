@@ -63,4 +63,15 @@
 
 .demo-wrapper {
   height: 150px;
+  min-height: 150px;
+}
+
+@media screen and (max-width: 600px) {
+  .modal-form {
+    padding: 20px;
+  }
+
+  .modal-form form {
+    width: 100%;
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/Files.css";
+import "../css/Users.css";
 import { FaSearch } from "react-icons/fa";
 import Search from "../components/Search";
 import { users } from "../data";
@@ -16,7 +16,7 @@ const Users = () => {
   };
 
   return (
-    <div className="files-container">
+    <div className="users-container">
       <div className="left">
         <h3>All Users</h3>
         <section className="search">
@@ -46,7 +46,7 @@ const Users = () => {
           <div>No result for your search</div>
         )}
       </div>
-      <div className="right">
+      {/* <div className="right">
         <div className="top">
           <h3>ejovwogfreeman</h3>
           <AiOutlineCloudUpload onClick={handleModal} />
@@ -57,7 +57,7 @@ const Users = () => {
           ))}
         </div>
         {modal && <Upload handleModal={handleModal} />}
-      </div>
+      </div> */}
     </div>
   );
 };
