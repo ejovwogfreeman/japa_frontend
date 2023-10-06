@@ -12,6 +12,8 @@ import Invoice from "./pages/Invoice";
 import Toastify from "./components/Toastify";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import "./App.css";
+import { AiOutlineMenu } from "react-icons/ai";
+// import { GrClose } from "react-icons/gr";
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -42,10 +44,26 @@ const App = () => {
     };
   }
 
+  const [showNav, setShowNav] = useState(false);
+
+  const handleShowNav = () => {
+    setShowNav(!showNav);
+  };
+
   return (
     <BrowserRouter>
+      {/* <span className="toast_cont"> */}
       <Toastify />
-      <SideNav />
+      {/* </span> */}
+      {/* {showNav ? (
+        <AiOutlineMenu onClick={handleShowNav} />
+      ) : (
+        <GrClose onClick={handleShowNav} />
+      )} */}
+      <span className="menu-btn">
+        <AiOutlineMenu onClick={handleShowNav} />
+      </span>
+      {showNav && <SideNav showNav={showNav} handleShowNav={handleShowNav} />}
       <div className="main-component">
         <Routes>
           <Route element={<ProtectedRoutes />}>

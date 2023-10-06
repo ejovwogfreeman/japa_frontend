@@ -1,15 +1,19 @@
 .side-nav {
-  width: 150px;
+  width: 200px;
   height: 100vh;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   position: fixed;
   left: 0px;
   padding-top: 25px;
+  background-color: white;
+  z-index: 10000000;
 }
 
 .side-nav img {
-  margin-bottom: 7px;
   width: 140px;
+  margin: auto;
+  display: block;
+  margin-bottom: 7px;
 }
 
 .side-nav a {
@@ -85,4 +89,28 @@
     margin-bottom: 7px;
     width: 110px;
   }
+}
+
+.close-icon {
+  text-align: right;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.close-icon svg {
+  font-size: 25px;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.close-icon svg:hover {
+  color: red;
+}
+
+.dark-bg {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  z-index: 10000;
 }

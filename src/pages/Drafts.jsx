@@ -265,7 +265,7 @@ const Drafts = ({ token }) => {
     const getDrafts = async () => {
       try {
         const res = await axios.get(
-          "https://japaconsults.sammykingx.tech/drafts/",
+          "https://japaconsults.sammykingx.tech/drafts",
           {
             headers,
           }
