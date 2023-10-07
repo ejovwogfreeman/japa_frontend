@@ -372,7 +372,7 @@ const Drafts = ({ token, handleShowNav }) => {
             className="open-link"
             style={{ border: "none" }}
           >
-            <IoAddCircleOutline />
+            <IoAddCircleOutline style={{ fontSize: "20px" }} />
           </Link>
           <section className="search">
             <FaSearch />

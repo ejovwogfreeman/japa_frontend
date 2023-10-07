@@ -7,6 +7,7 @@ import { users } from "../data";
 import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
 import Upload from "../modals/Upload";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
+import { Link } from "react-router-dom";
 
 const Invoice = ({ handleShowNav }) => {
   const { query, results, handleInputChange } = Search(files);
@@ -22,7 +23,10 @@ const Invoice = ({ handleShowNav }) => {
         <AiOutlineMenu onClick={handleShowNav} />
       </span>
       <div className="left">
-        <h3>All Invoices</h3>
+        <h3>All Invoices</h3>{" "}
+        <Link to="/add_draft" className="open-link" style={{ border: "none" }}>
+          <AiOutlineCloudUpload style={{ fontSize: "20px" }} />
+        </Link>
         <section className="search">
           <FaSearch />
           <input

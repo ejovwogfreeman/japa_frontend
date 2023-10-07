@@ -7,6 +7,7 @@ import { users } from "../data";
 import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
 import Upload from "../modals/Upload";
 import { BsFolder2 } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Files = ({ handleShowNav }) => {
   const { query, results, handleInputChange } = Search(files);
@@ -22,7 +23,10 @@ const Files = ({ handleShowNav }) => {
         <AiOutlineMenu onClick={handleShowNav} />
       </span>
       <div className="left">
-        <h3>All Files</h3>
+        <h3>All Files</h3>{" "}
+        <Link to="/add_draft" className="open-link" style={{ border: "none" }}>
+          <AiOutlineCloudUpload style={{ fontSize: "20px" }} />
+        </Link>
         <section className="search">
           <FaSearch />
           <input

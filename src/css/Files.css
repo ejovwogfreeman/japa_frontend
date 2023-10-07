@@ -3,11 +3,13 @@
 }
 
 .files-container .left {
-  flex: 1;
+  /* flex: 1; */
+  position: relative;
   padding-top: 20px;
   height: 100vh;
   overflow-y: scroll;
   padding-left: 40px;
+  width: 900px;
 }
 .files-container .left h3 {
   margin-left: 10px;
@@ -63,6 +65,7 @@
 }
 
 .files-container .right {
+  display: none;
   flex: 2;
   height: 100vh;
   overflow-y: scroll;
@@ -150,4 +153,21 @@
   .files-container .right {
     display: none;
   }
+}
+
+.left .open-link {
+  position: absolute;
+  top: 5px;
+  border: 0px;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.left .open-link:hover {
+  background-color: transparent;
+}
+
+.left .open-link svg {
+  font-size: 20px;
 }
