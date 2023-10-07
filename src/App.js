@@ -104,7 +104,7 @@ const App = () => {
           <Route element={<ProtectedRoutes />}>
             <Route
               path="/add_draft"
-              element={<AddModal handleShowNav={handleShowNav} />}
+              element={<AddModal handleShowNav={handleShowNav} token={token} />}
             />
           </Route>
           <Route element={<ProtectedRoutes />}>

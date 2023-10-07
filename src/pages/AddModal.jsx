@@ -17,6 +17,7 @@ const AddModal = ({ handleShowAddModal, token }) => {
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);
   };
+  console.log(token);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -54,8 +55,7 @@ const AddModal = ({ handleShowAddModal, token }) => {
       );
 
       toast.success("DRAFT CREATED");
-      handleShowAddModal();
-      window.location.reload();
+      window.location.replace("/drafts");
       console.log("Draft created successfully:", response.data);
     } catch (error) {
       toast.error("DRAFT CREATION FAILED");

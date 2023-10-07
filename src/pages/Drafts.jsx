@@ -267,7 +267,7 @@ const Drafts = ({ token, handleShowNav }) => {
     const getDrafts = async () => {
       try {
         const res = await axios.get(
-          "https://japaconsults.sammykingx.tech/drafts",
+          "https://japaconsults.sammykingx.tech/notes",
           {
             headers,
           }
@@ -293,7 +293,7 @@ const Drafts = ({ token, handleShowNav }) => {
       setIsLoading(true);
 
       const response = await axios.delete(
-        `http://test.sammykingx.tech/drafts/delete/?d_id=${id}`,
+        `http://test.sammykingx.tech/notes/delete/?d_id=${id}`,
         { headers }
       );
 
@@ -332,6 +332,8 @@ const Drafts = ({ token, handleShowNav }) => {
   const handleShowDrafts = () => {
     setShowDrafts(!showDrafts);
   };
+
+  console.log(drafts);
 
   return (
     <div className="draft-container">
@@ -392,6 +394,14 @@ const Drafts = ({ token, handleShowNav }) => {
               <span className="top">
                 <strong> {x.title}</strong>
               </span>
+              <div
+                style={{ marginLeft: "0px" }}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    x.content.slice(0, 50) +
+                    " ...<em><small><Link to='/' style='color: blue'>see more</Link></small></em>",
+                }}
+              />
               <span className="msg">{x.date_created}</span>
             </div>
           ))}
