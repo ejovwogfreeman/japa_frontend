@@ -25,7 +25,7 @@ const Invoice = ({ handleShowNav }) => {
       <div className="left">
         <h3>All Invoices</h3>{" "}
         <Link to="/add_draft" className="open-link" style={{ border: "none" }}>
-          <AiOutlineCloudUpload style={{ fontSize: "25px" }} />
+          <AiOutlineCloudUpload style={{ fontSize: "20px" }} />
         </Link>
         <section className="search">
           <FaSearch />
