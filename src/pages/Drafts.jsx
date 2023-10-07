@@ -362,10 +362,10 @@ const Drafts = ({ token, handleShowNav }) => {
         </>
       )}
       <>
-        <span className="menu-btn">
-          <AiOutlineMenu onClick={handleShowNav} />
-        </span>
         <div className="left">
+          <span className="menu-btn">
+            <AiOutlineMenu onClick={handleShowNav} />
+          </span>
           <h3>All Drafts</h3>{" "}
           <Link
             to="/add_draft"

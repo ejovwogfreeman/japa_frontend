@@ -15,6 +15,7 @@ const SideNav = ({ showNav, handleShowNav }) => {
   const logout = () => {
     sessionStorage.removeItem("user");
     navigate("/login");
+    handleShowNav();
   };
   return (
     <>

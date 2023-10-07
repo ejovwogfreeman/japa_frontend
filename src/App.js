@@ -13,6 +13,7 @@ import Toastify from "./components/Toastify";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import "./App.css";
 import AddModal from "./pages/AddModal";
+import FileUpload from "./pages/FileUpload";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
@@ -104,6 +105,12 @@ const App = () => {
             <Route
               path="/add_draft"
               element={<AddModal handleShowNav={handleShowNav} />}
+            />
+          </Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/file_upload"
+              element={<FileUpload handleShowNav={handleShowNav} />}
             />
           </Route>
           <Route path="/register" element={<SignUp />} />

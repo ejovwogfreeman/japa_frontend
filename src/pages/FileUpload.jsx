@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Modal.css";
 import { AiOutlineClose } from "react-icons/ai";
 
-const Upload = ({ handleModal }) => {
+const FileUpload = ({ handleModal }) => {
   return (
     <div className="modal-form">
       <form>
@@ -20,4 +20,4 @@ const Upload = ({ handleModal }) => {
   );
 };
 
-export default Upload;
+export default FileUpload;

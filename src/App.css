@@ -24,7 +24,7 @@
 } */
 
 .menu-btn {
-  position: fixed;
+  position: absolute;
   top: 25px;
   left: 10px;
   cursor: pointer;

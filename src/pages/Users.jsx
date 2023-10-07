@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import Search from "../components/Search";
 import { users } from "../data";
 import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
-import Upload from "../modals/Upload";
+import Upload from "./FileUpload";
 import { Link } from "react-router-dom";
 
 const Users = ({ handleShowNav }) => {
@@ -17,10 +17,10 @@ const Users = ({ handleShowNav }) => {
 
   return (
     <div className="users-container">
-      <span className="menu-btn">
-        <AiOutlineMenu onClick={handleShowNav} />
-      </span>
       <div className="left">
+        <span className="menu-btn">
+          <AiOutlineMenu onClick={handleShowNav} />
+        </span>
         <h3>All Users</h3>
         <section className="search">
           <FaSearch />

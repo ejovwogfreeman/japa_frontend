@@ -17,6 +17,12 @@ const Home = ({ user, handleShowNav }) => {
     navigate("/login");
   };
 
+  // const [tog, setTog]=useState
+
+  // const handleTog = ()=> {
+  //   window.scrollY > 200?
+  // }
+
   const cards = [
     { id: 1, icon: <FaUsers />, text: "Members", num: 55 },
     { id: 2, icon: <BsFolder2 />, text: "Uploads", num: 55 },
