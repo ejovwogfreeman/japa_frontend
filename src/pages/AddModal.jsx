@@ -27,6 +27,10 @@ const AddModal = ({ handleShowAddModal, token }) => {
       return toast.error("PLEASE FILL ALL FIELDS");
     }
 
+    if (title.length > 245) {
+      return toast.error("TITLE FIELD HAS A MAXIMUM LIMIT OF 245 CHARACTERS");
+    }
+
     try {
       const contentState = editorState.getCurrentContent();
       const contentHTML = draftToHtml(convertToRaw(contentState));

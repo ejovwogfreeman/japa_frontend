@@ -35,6 +35,12 @@ const SignUp = () => {
     if (!name || !email || !phone_num || !password || !confirmPassword) {
       return toast.error("PLEASE FILL ALL FIELDS");
     }
+    if (name.length > 49) {
+      return toast.error("NAME FIELD HAS A MAXIMUM LIMIT OF 49 CHARACTERS");
+    }
+    if (email.length > 29) {
+      return toast.error("EMAIL FIELD HAS A MAXIMUM LIMIT OF 29 CHARACTERS");
+    }
     if (password.length < 8) {
       return toast.error("PASSWORD MUST BE AT LEAST 8 CHARACTERS LONG");
     }
