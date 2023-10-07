@@ -309,7 +309,7 @@
     display: none;
   }
   .draft-container .left {
-    min-width: 280px;
+    /* min-width: 280px; */
   }
 }
 
@@ -326,16 +326,12 @@
   }
 
   .draft-container .left {
-    min-width: 70px;
+    /* min-width: 70px; */
     justify-content: center;
-    display: none;
+    /* display: none; */
   }
   .draft-container .left img {
     margin: auto;
-  }
-  .draft-container .left .search,
-  .draft-container .left h3 {
-    display: none;
   }
 
   .draft-container a {
