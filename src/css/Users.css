@@ -4,6 +4,7 @@
 
 .users-container .left {
   padding-top: 20px;
+  padding-left: 40px;
   height: 100vh;
   overflow-y: scroll;
   width: 700px;

@@ -1,22 +1,23 @@
-.message-container {
+.draft-container {
   display: flex;
   justify-content: space-between;
 }
 
-.message-container .left {
+.draft-container .left {
   flex: 1;
   padding-top: 20px;
+  padding-left: 40px;
   height: 100vh;
   overflow-y: scroll;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.message-container .left h3 {
+.draft-container .left h3 {
   margin-left: 10px;
   margin-bottom: 10px;
 }
 
-.message-container .left .search {
+.draft-container .left .search {
   display: flex;
   align-items: center;
   margin-left: 10px;
@@ -27,7 +28,7 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.message-container .left .search input {
+.draft-container .left .search input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -35,7 +36,7 @@
   margin-left: 5px;
 }
 
-.message-container .left a {
+.draft-container .left a {
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -44,46 +45,46 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.message-container .left a:first-of-type {
+.draft-container .left a:first-of-type {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.message-container .left a:hover {
+.draft-container .left a:hover {
   background-color: rgba(0, 0, 255, 0.1);
 }
 
-.message-container .left a img {
+.draft-container .left a img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.message-container .left div:not(:first-child) {
+.draft-container .left div:not(:first-child) {
   margin-left: 10px;
   width: 100%;
 }
 
-.message-container .left .top {
+.draft-container .left .top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3px;
 }
 
-.message-container .left .top span:first-child {
+.draft-container .left .top span:first-child {
   font-weight: bold;
 }
 
-.message-container .left .msg {
+.draft-container .left .msg {
   font-size: 13px;
 }
 
-.message-container .center {
+.draft-container .center {
   flex: 2;
   position: relative;
 }
 
-.message-container .center .top {
+.draft-container .center .top {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,31 +93,31 @@
   padding: 10px;
 }
 
-.message-container .center .top .top-left {
+.draft-container .center .top .top-left {
   display: flex;
   align-items: center;
 }
 
-.message-container .center .top .top-left .text {
+.draft-container .center .top .top-left .text {
   margin-left: 10px;
 }
 
-.message-container .center .top .top-left .text span {
+.draft-container .center .top .top-left .text span {
   display: block;
 }
 
-.message-container .center .top img {
+.draft-container .center .top img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.message-container .center .top .top-right {
+.draft-container .center .top .top-right {
   display: flex;
   align-items: center;
 }
 
-.message-container .center .top .top-right svg {
+.draft-container .center .top .top-right svg {
   font-size: 30px;
   background: rgba(0, 0, 0, 0.1);
   padding: 5px;
@@ -127,7 +128,7 @@
   cursor: pointer;
 }
 
-.message-container .center form {
+.draft-container .center form {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,7 +139,7 @@
   padding: 5px;
 }
 
-.message-container .center form input {
+.draft-container .center form input {
   width: 100%;
   background: transparent;
   border: none;
@@ -147,7 +148,7 @@
   font-size: 16px;
 }
 
-.message-container .center form button {
+.draft-container .center form button {
   width: 80px;
   font-size: 16px;
   padding: 5px;
@@ -221,52 +222,52 @@
   background-color: white;
 }
 
-.message-container .right {
+.draft-container .right {
   height: 100vh;
   flex: 1;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.message-container .right {
+.draft-container .right {
   text-align: center;
   padding-top: 60px;
 }
 
-.message-container .right img {
+.draft-container .right img {
   width: 130px;
   height: 130px;
   border-radius: 50%;
   margin-bottom: 10px;
 }
 
-.message-container .right span {
+.draft-container .right span {
   font-weight: bold;
   display: block;
 }
 
-.message-container .right p {
+.draft-container .right p {
   margin-top: -10px;
   font-size: 14px;
   padding: 0px 10px;
 }
 
-.message-container .right section {
+.draft-container .right section {
   display: flex;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.message-container .right section:first-of-type {
+.draft-container .right section:first-of-type {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 30px;
 }
 
-.message-container .right section span {
+.draft-container .right section span {
   font-size: 13px;
 }
 
-.message-container .right section span:last-child {
+.draft-container .right section span:last-child {
   font-weight: normal;
   margin-left: 10px;
 }
@@ -297,47 +298,59 @@
   font-size: 22px;
 }
 
+.desktop-block {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
-  .message-container .right {
+  .draft-container .right {
     display: none;
   }
-  .message-container .left {
+  .draft-container .left {
     min-width: 280px;
   }
 }
 
 @media screen and (max-width: 700px) {
+  .desktop-block {
+    display: block;
+    margin-top: -7px;
+  }
+
   .draft-icon {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .message-container .left {
+  .draft-container .left {
     min-width: 70px;
     justify-content: center;
     display: none;
   }
-  .message-container .left img {
+  .draft-container .left img {
     margin: auto;
   }
-  .message-container .left .search,
-  .message-container .left h3 {
+  .draft-container .left .search,
+  .draft-container .left h3 {
     display: none;
   }
 
-  .message-container a {
+  .draft-container a {
     display: block;
   }
-  .message-container .left a div {
+  .draft-container .left a div {
     display: none;
   }
-  .message-container .center {
+  .draft-container .center {
     height: auto;
     margin-left: 0px;
     flex: auto;
   }
-  .message-container .center .top .top-left .text {
+  .draft-container .center .top .top-left .text {
+    display: none;
+  }
+  .draft-container .center .top .top-left img {
     display: none;
   }
   .chats {
@@ -345,7 +358,7 @@
     padding: 3px;
     padding-right: 0px;
   }
-  .message-container .center form {
+  .draft-container .center form {
     margin: 5px;
   }
 }

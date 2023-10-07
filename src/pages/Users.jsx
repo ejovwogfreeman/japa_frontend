@@ -3,11 +3,11 @@ import "../css/Users.css";
 import { FaSearch } from "react-icons/fa";
 import Search from "../components/Search";
 import { users } from "../data";
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
 import Upload from "../modals/Upload";
 import { Link } from "react-router-dom";
 
-const Users = () => {
+const Users = ({ handleShowNav }) => {
   const { query, results, handleInputChange } = Search(users);
 
   const [modal, setModal] = useState(false);
@@ -17,6 +17,9 @@ const Users = () => {
 
   return (
     <div className="users-container">
+      <span className="menu-btn">
+        <AiOutlineMenu onClick={handleShowNav} />
+      </span>
       <div className="left">
         <h3>All Users</h3>
         <section className="search">

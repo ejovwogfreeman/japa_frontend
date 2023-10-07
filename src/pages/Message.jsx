@@ -152,8 +152,9 @@ import { BsSend } from "react-icons/bs";
 import { users, chats } from "../data";
 import Search from "../components/Search";
 import io from "socket.io-client"; // Import Socket.io;
+import { AiOutlineMenu } from "react-icons/ai";
 
-const Message = ({ token }) => {
+const Message = ({ token, handleShowNav }) => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -259,10 +260,11 @@ const Message = ({ token }) => {
               <span>online</span>
             </div>
           </div>
-          {/* <div className="top-right">
-            <IoCallOutline />
-            <HiOutlineVideoCamera />
-          </div> */}
+          <div className="top-right">
+            {/* <IoCallOutline />
+            <HiOutlineVideoCamera /> */}
+            <AiOutlineMenu onClick={handleShowNav} />
+          </div>
         </div>
         <div className="chats">
           {chats.map((x) => (

@@ -249,10 +249,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { RiDraftLine } from "react-icons/ri";
 import DraftsModal from "./DraftsModal";
+import { AiOutlineMenu } from "react-icons/ai";
 // import { useNavigate } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
-const Drafts = ({ token }) => {
+const Drafts = ({ token, handleShowNav }) => {
   const [drafts, setDrafts] = useState([]);
   const [selectedDraft, setSelectedDraft] = useState(null); // Track the selected draft
   const { query, results, handleInputChange } = Search(drafts);
@@ -332,7 +333,7 @@ const Drafts = ({ token }) => {
   };
 
   return (
-    <div className="message-container">
+    <div className="draft-container">
       {showAddModal && (
         <AddModal handleShowAddModal={handleShowAddModal} token={token} />
       )}
@@ -359,89 +360,56 @@ const Drafts = ({ token }) => {
           )}
         </>
       )}
-
-      <div className="left">
-        <h3>All Drafts</h3>
-        <section className="search">
-          <FaSearch />
-          <input
-            type="text"
-            placeholder="Search..."
-            value={query}
-            onChange={handleInputChange}
-          />
-        </section>
-        {drafts.map((x) => (
-          <div
-            className={`draft-item ${x === selectedDraft ? "selected" : ""}`}
-            key={x.draft_id}
-            onClick={() => handleDraftSelection(x)}
-          >
-            <span className="top">
-              <strong> {x.title}</strong>
-            </span>
-            <span className="msg">{x.date_created}</span>
-          </div>
-        ))}
-        {results.length === 0 && query !== "" && (
-          <div>No result for your search</div>
-        )}
-      </div>
-      <div className="center">
-        <div className="top">
-          <div className="top-left">
-            <img src={img} alt="" />
-            <div className="text">
-              <span>ejovwogfreeman</span>
-              <span>online</span>
-            </div>
-          </div>
-          <div className="top-right">
-            <IoCreateOutline onClick={handleShowUpdateModal} />
-            <IoAddCircleOutline onClick={handleShowAddModal} />
-          </div>
-        </div>
-        <div className="chats">
-          {selectedDraft ? (
+      <>
+        <span className="menu-btn">
+          <AiOutlineMenu onClick={handleShowNav} />
+        </span>
+        <div className="left">
+          <h3>All Drafts</h3>
+          <section className="search">
+            <FaSearch />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={query}
+              onChange={handleInputChange}
+            />
+          </section>
+          {drafts.map((x) => (
             <div
-              className="receiver-color"
-              style={{
-                padding: "10px",
-                paddingTop: "30px",
-                paddingBottom: "30px",
-                position: "relative",
-              }}
+              className={`draft-item ${x === selectedDraft ? "selected" : ""}`}
+              key={x.draft_id}
+              onClick={() => handleDraftSelection(x)}
             >
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: selectedDraft.content,
-                }}
-              />
-              <small
-                style={{
-                  position: "absolute",
-                  top: "5px",
-                  right: "5px",
-                  cursor: "pointer",
-                  fontSize: "20px",
-                }}
-              >
-                <BsTrash
-                  onClick={() => handleDeleteDraft(selectedDraft.draft_id)}
-                />
-              </small>
-              <small
-                style={{ position: "absolute", bottom: "5px", right: "10px" }}
-              >
-                {selectedDraft.date_created}
-              </small>
-            </div>
-          ) : (
-            <>
-              <span className="draft-icon" onClick={handleShowDrafts}>
-                <RiDraftLine />
-                <span>ALL DRAFTS</span>
+              <span className="top">
+                <strong> {x.title}</strong>
               </span>
+              <span className="msg">{x.date_created}</span>
+            </div>
+          ))}
+          {results.length === 0 && query !== "" && (
+            <div>No result for your search</div>
+          )}
+        </div>
+        <div className="center">
+          <div className="top">
+            <div className="top-left">
+              <span className="menu-btn desktop-block">
+                <AiOutlineMenu onClick={handleShowNav} />
+              </span>
+              <img src={img} alt="" />
+              <div className="text">
+                <span>ejovwogfreeman</span>
+                <span>online</span>
+              </div>
+            </div>
+            <div className="top-right">
+              <IoCreateOutline onClick={handleShowUpdateModal} />
+              <IoAddCircleOutline onClick={handleShowAddModal} />
+            </div>
+          </div>
+          <div className="chats">
+            {selectedDraft ? (
               <div
                 className="receiver-color"
                 style={{
@@ -449,17 +417,57 @@ const Drafts = ({ token }) => {
                   paddingTop: "30px",
                   paddingBottom: "30px",
                   position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
                 }}
               >
-                <span>Please select a draft</span>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: selectedDraft.content,
+                  }}
+                />
+                <small
+                  style={{
+                    position: "absolute",
+                    top: "5px",
+                    right: "5px",
+                    cursor: "pointer",
+                    fontSize: "20px",
+                  }}
+                >
+                  <BsTrash
+                    onClick={() => handleDeleteDraft(selectedDraft.draft_id)}
+                  />
+                </small>
+                <small
+                  style={{ position: "absolute", bottom: "5px", right: "10px" }}
+                >
+                  {selectedDraft.date_created}
+                </small>
               </div>
-            </>
-          )}
+            ) : (
+              <>
+                <span className="draft-icon" onClick={handleShowDrafts}>
+                  <RiDraftLine />
+                  <span>ALL DRAFTS</span>
+                </span>
+                <div
+                  className="receiver-color"
+                  style={{
+                    padding: "10px",
+                    paddingTop: "30px",
+                    paddingBottom: "30px",
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span>Please select a draft</span>
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      </>
     </div>
   );
 };

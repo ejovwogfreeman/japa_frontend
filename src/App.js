@@ -12,7 +12,7 @@ import Invoice from "./pages/Invoice";
 import Toastify from "./components/Toastify";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import "./App.css";
-import { AiOutlineMenu } from "react-icons/ai";
+// import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
 const App = () => {
@@ -60,29 +60,44 @@ const App = () => {
       ) : (
         <GrClose onClick={handleShowNav} />
       )} */}
-      <span className="menu-btn">
-        <AiOutlineMenu onClick={handleShowNav} />
-      </span>
       {showNav && <SideNav showNav={showNav} handleShowNav={handleShowNav} />}
       <div className="main-component">
         <Routes>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/" element={<Home user={user} />} />{" "}
+            <Route
+              path="/"
+              element={<Home user={user} handleShowNav={handleShowNav} />}
+            />{" "}
           </Route>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/message" element={<Message token={token} />} />
+            <Route
+              path="/message"
+              element={<Message token={token} handleShowNav={handleShowNav} />}
+            />
           </Route>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/drafts" element={<Drafts token={token} />} />
+            <Route
+              path="/drafts"
+              element={<Drafts token={token} handleShowNav={handleShowNav} />}
+            />
           </Route>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/files" element={<Files />} />
+            <Route
+              path="/files"
+              element={<Files handleShowNav={handleShowNav} />}
+            />
           </Route>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/users" element={<Users />} />
+            <Route
+              path="/users"
+              element={<Users handleShowNav={handleShowNav} />}
+            />
           </Route>
           <Route element={<ProtectedRoutes />}>
-            <Route path="/invoices" element={<Invoice />} />
+            <Route
+              path="/invoices"
+              element={<Invoice handleShowNav={handleShowNav} />}
+            />
           </Route>
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<SignIn />} />

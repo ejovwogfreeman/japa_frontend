@@ -4,11 +4,11 @@ import { FaSearch } from "react-icons/fa";
 import { files } from "../data";
 import Search from "../components/Search";
 import { users } from "../data";
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
 import Upload from "../modals/Upload";
 import { BsFolder2 } from "react-icons/bs";
 
-const Files = () => {
+const Files = ({ handleShowNav }) => {
   const { query, results, handleInputChange } = Search(files);
 
   const [modal, setModal] = useState(false);
@@ -18,6 +18,9 @@ const Files = () => {
 
   return (
     <div className="files-container">
+      <span className="menu-btn">
+        <AiOutlineMenu onClick={handleShowNav} />
+      </span>
       <div className="left">
         <h3>All Files</h3>
         <section className="search">

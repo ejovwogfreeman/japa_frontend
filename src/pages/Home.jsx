@@ -8,8 +8,9 @@ import img from "../images/gb-profile.png";
 import { Link, useNavigate } from "react-router-dom";
 import { BsChatRightText, BsFolder2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
+import { AiOutlineMenu } from "react-icons/ai";
 
-const Home = ({ user }) => {
+const Home = ({ user, handleShowNav }) => {
   const navigate = useNavigate();
   const logoutUser = () => {
     sessionStorage.removeItem("user");
@@ -24,6 +25,9 @@ const Home = ({ user }) => {
   ];
   return (
     <div className="dashboard-component">
+      <span className="menu-btn">
+        <AiOutlineMenu onClick={handleShowNav} />
+      </span>
       <div className="top">
         <div>
           <h2>Dashboard</h2>
