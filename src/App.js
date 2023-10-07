@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SideNav from "./components/SideNav";
 import Home from "./pages/Home";
@@ -7,13 +7,16 @@ import Files from "./pages/Files";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Drafts from "./pages/Drafts";
+import Draft from "./pages/Draft";
 import Users from "./pages/Users";
 import Invoice from "./pages/Invoice";
 import Toastify from "./components/Toastify";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import "./App.css";
 import AddModal from "./pages/AddModal";
+import UpdateModal from "./pages/UpdateModal";
 import FileUpload from "./pages/FileUpload";
+import axios from "axios";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
@@ -46,6 +49,35 @@ const App = () => {
     };
   }
 
+  const [drafts, setDrafts] = useState([]);
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  useEffect(() => {
+    const getDrafts = async () => {
+      try {
+        const res = await axios.get(
+          "https://japaconsults.sammykingx.tech/notes",
+          {
+            headers,
+          }
+        );
+
+        if (res.status === 200) {
+          setDrafts(res.data);
+        } else {
+          console.error("Failed to fetch drafts:", res.status, res.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching drafts:", error);
+      }
+    };
+
+    getDrafts();
+  }, [headers]);
+
   const [showNav, setShowNav] = useState(false);
 
   const handleShowNav = () => {
@@ -54,14 +86,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* <span className="toast_cont"> */}
       <Toastify />
-      {/* </span> */}
-      {/* {showNav ? (
-        <AiOutlineMenu onClick={handleShowNav} />
-      ) : (
-        <GrClose onClick={handleShowNav} />
-      )} */}
       {showNav && <SideNav showNav={showNav} handleShowNav={handleShowNav} />}
       <div className="main-component">
         <Routes>
@@ -80,7 +105,25 @@ const App = () => {
           <Route element={<ProtectedRoutes />}>
             <Route
               path="/drafts"
-              element={<Drafts token={token} handleShowNav={handleShowNav} />}
+              element={
+                <Drafts
+                  token={token}
+                  handleShowNav={handleShowNav}
+                  drafts={drafts}
+                />
+              }
+            />
+          </Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/draft/:id"
+              element={
+                <Draft
+                  token={token}
+                  handleShowNav={handleShowNav}
+                  drafts={drafts}
+                />
+              }
             />
           </Route>
           <Route element={<ProtectedRoutes />}>
@@ -104,7 +147,25 @@ const App = () => {
           <Route element={<ProtectedRoutes />}>
             <Route
               path="/add_draft"
-              element={<AddModal handleShowNav={handleShowNav} token={token} />}
+              element={
+                <AddModal
+                  handleShowNav={handleShowNav}
+                  token={token}
+                  drafts={drafts}
+                />
+              }
+            />
+          </Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/edit_draft/:id"
+              element={
+                <UpdateModal
+                  handleShowNav={handleShowNav}
+                  token={token}
+                  drafts={drafts}
+                />
+              }
             />
           </Route>
           <Route element={<ProtectedRoutes />}>
@@ -122,3 +183,172 @@ const App = () => {
 };
 
 export default App;
+
+// import React, { useState, useEffect } from "react";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import axios from "axios";
+// import SideNav from "./components/SideNav";
+// import Home from "./pages/Home";
+// import Message from "./pages/Message";
+// import Files from "./pages/Files";
+// import SignUp from "./pages/SignUp";
+// import SignIn from "./pages/SignIn";
+// import Drafts from "./pages/Drafts";
+// import Draft from "./pages/Draft";
+// import Users from "./pages/Users";
+// import Invoice from "./pages/Invoice";
+// import Toastify from "./components/Toastify";
+// import ProtectedRoutes from "./components/ProtectedRoutes";
+// import AddModal from "./pages/AddModal";
+// import UpdateModal from "./pages/UpdateModal";
+// import FileUpload from "./pages/FileUpload";
+// import jwt_decode from "jwt-decode";
+
+// const App = () => {
+//   // Extract user from sessionStorage
+//   const localUser = JSON.parse(sessionStorage.getItem("user"));
+//   const [user, setUser] = useState(localUser || {});
+//   const token = user?.access_token || null;
+
+//   // Fetch user data
+//   useEffect(() => {
+//     const fetchUser = async () => {
+//       if (token) {
+//         try {
+//           const response = await axios.get(
+//             "https://japaconsults.sammykingx.tech/user/profile",
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           setUser(response.data);
+//         } catch (error) {
+//           console.error("Error fetching user data:", error);
+//         }
+//       }
+//     };
+
+//     fetchUser();
+//   }, [token]);
+
+//   // Fetch drafts
+//   const [drafts, setDrafts] = useState([]);
+
+//   useEffect(() => {
+//     const fetchDrafts = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://japaconsults.sammykingx.tech/notes",
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
+
+//         if (response.status === 200) {
+//           setDrafts(response.data);
+//         } else {
+//           console.error(
+//             "Failed to fetch drafts:",
+//             response.status,
+//             response.statusText
+//           );
+//         }
+//       } catch (error) {
+//         console.error("Error fetching drafts:", error);
+//       }
+//     };
+
+//     fetchDrafts();
+//   }, [token]);
+
+//   const [showNav, setShowNav] = useState(false);
+
+//   const handleShowNav = () => {
+//     setShowNav(!showNav);
+//   };
+
+//   return (
+//     <BrowserRouter>
+//       <Toastify />
+//       {showNav && <SideNav showNav={showNav} handleShowNav={handleShowNav} />}
+//       <div className="main-component">
+//         <Routes>
+//           <Route element={<ProtectedRoutes />}>
+//             <Route
+//               path="/"
+//               element={<Home user={user} handleShowNav={handleShowNav} />}
+//             />
+//             <Route
+//               path="/message"
+//               element={<Message token={token} handleShowNav={handleShowNav} />}
+//             />
+//             <Route
+//               path="/drafts"
+//               element={
+//                 <Drafts
+//                   token={token}
+//                   handleShowNav={handleShowNav}
+//                   drafts={drafts}
+//                 />
+//               }
+//             />
+//             <Route
+//               path="/draft/:id"
+//               element={
+//                 <Draft
+//                   token={token}
+//                   handleShowNav={handleShowNav}
+//                   drafts={drafts}
+//                 />
+//               }
+//             />
+//             <Route
+//               path="/files"
+//               element={<Files handleShowNav={handleShowNav} />}
+//             />
+//             <Route
+//               path="/users"
+//               element={<Users handleShowNav={handleShowNav} />}
+//             />
+//             <Route
+//               path="/invoices"
+//               element={<Invoice handleShowNav={handleShowNav} />}
+//             />
+//             <Route
+//               path="/add_draft"
+//               element={
+//                 <AddModal
+//                   handleShowNav={handleShowNav}
+//                   token={token}
+//                   drafts={drafts}
+//                 />
+//               }
+//             />
+//             <Route
+//               path="/edit_draft/:id"
+//               element={
+//                 <UpdateModal
+//                   handleShowNav={handleShowNav}
+//                   token={token}
+//                   drafts={drafts}
+//                 />
+//               }
+//             />
+//             <Route
+//               path="/file_upload"
+//               element={<FileUpload handleShowNav={handleShowNav} />}
+//             />
+//           </Route>
+//           <Route path="/register" element={<SignUp />} />
+//           <Route path="/login" element={<SignIn />} />
+//         </Routes>
+//       </div>
+//     </BrowserRouter>
+//   );
+// };
+
+// export default App;

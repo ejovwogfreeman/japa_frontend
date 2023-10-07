@@ -70,7 +70,7 @@ const AddModal = ({ handleShowAddModal, token }) => {
       <form onSubmit={handleFormSubmit}>
         <h3>CREATE DRAFT</h3>
         <Link to="/drafts">
-          <AiOutlineClose onClick={handleShowAddModal} />
+          <AiOutlineClose />
         </Link>
         <div>
           <label htmlFor="title">Draft title</label>

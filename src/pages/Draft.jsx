@@ -250,41 +250,43 @@ import { toast } from "react-toastify";
 import { RiDraftLine } from "react-icons/ri";
 import DraftsModal from "./DraftsModal";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
-const Drafts = ({ token, handleShowNav, drafts }) => {
-  // const [drafts, setDrafts] = useState([]);
+const Draft = ({ token, handleShowNav, drafts }) => {
+  //   const [drafts, setDrafts] = useState([]);
   const [selectedDraft, setSelectedDraft] = useState(null); // Track the selected draft
   const { query, results, handleInputChange } = Search(drafts);
+
+  const params = useParams();
 
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  // useEffect(() => {
-  //   const getDrafts = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         "https://japaconsults.sammykingx.tech/notes",
-  //         {
-  //           headers,
+  //   useEffect(() => {
+  //     const getDrafts = async () => {
+  //       try {
+  //         const res = await axios.get(
+  //           "https://japaconsults.sammykingx.tech/notes",
+  //           {
+  //             headers,
+  //           }
+  //         );
+
+  //         if (res.status === 200) {
+  //           setDrafts(res.data);
+  //         } else {
+  //           console.error("Failed to fetch drafts:", res.status, res.statusText);
   //         }
-  //       );
-
-  //       if (res.status === 200) {
-  //         setDrafts(res.data);
-  //       } else {
-  //         console.error("Failed to fetch drafts:", res.status, res.statusText);
+  //       } catch (error) {
+  //         console.error("Error fetching drafts:", error);
   //       }
-  //     } catch (error) {
-  //       console.error("Error fetching drafts:", error);
-  //     }
-  //   };
+  //     };
 
-  //   getDrafts();
-  // }, [headers]);
+  //     getDrafts();
+  //   }, [headers]);
 
   const [isLoading, setIsLoading] = useState(false);
   const handleDeleteDraft = async (id) => {
@@ -370,11 +372,11 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
           </span>
           <h3>All Drafts</h3>{" "}
           <Link
-            to="/add_draft"
+            to={`/edit_draft/${params.id}`}
             className="open-link"
             style={{ border: "none", padding: "5px" }}
           >
-            <IoAddCircleOutline style={{ fontSize: "25px" }} />
+            <IoCreateOutline style={{ fontSize: "25px" }} />
           </Link>
           <section className="search">
             <FaSearch />
@@ -386,30 +388,28 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
             />
           </section>
           {drafts.map((x) => (
-            <Link to={`/draft/${x.draft_id}`} key={Math.random()}>
-              <div
-                to="/"
-                className={`draft-item ${
-                  x === selectedDraft ? "selected" : ""
-                }`}
-                key={x.draft_id}
-                onClick={() => handleDraftSelection(x)}
-                style={{ border: "none" }}
-              >
-                <span className="top">
-                  <strong> {x.title}</strong>
-                </span>
+            <section key={Math.random()}>
+              {Number(x.draft_id) === Number(params.id) && (
                 <div
-                  style={{ marginLeft: "0px" }}
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      x.content.slice(0, 50) +
-                      ` ...<em><small><Link to='/draft/${x.draft_id}' style='color: blue'>see more</Link></small></em>`,
-                  }}
-                />
-                <span className="msg">{x.date_created}</span>
-              </div>
-            </Link>
+                  className={`draft-item ${
+                    x === selectedDraft ? "selected" : ""
+                  }`}
+                  key={x.draft_id}
+                  onClick={() => handleDraftSelection(x)}
+                >
+                  <span className="top">
+                    <strong> {x.title}</strong>
+                  </span>
+                  <div
+                    style={{ marginLeft: "0px" }}
+                    dangerouslySetInnerHTML={{
+                      __html: x.content,
+                    }}
+                  />
+                  <span className="msg">{x.date_created}</span>
+                </div>
+              )}
+            </section>
           ))}
           {results.length === 0 && query !== "" && (
             <div>No result for your search</div>
@@ -496,4 +496,4 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
   );
 };
 
-export default Drafts;
+export default Draft;
