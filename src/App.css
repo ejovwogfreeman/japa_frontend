@@ -28,7 +28,7 @@
   top: 25px;
   left: 10px;
   cursor: pointer;
-  z-index: 111111111;
+  z-index: 1;
 }
 
 .menu-btn svg {
