@@ -250,6 +250,7 @@ import { toast } from "react-toastify";
 import { RiDraftLine } from "react-icons/ri";
 import DraftsModal from "./DraftsModal";
 import { AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
@@ -365,7 +366,14 @@ const Drafts = ({ token, handleShowNav }) => {
           <AiOutlineMenu onClick={handleShowNav} />
         </span>
         <div className="left">
-          <h3>All Drafts</h3>
+          <h3>All Drafts</h3>{" "}
+          <Link
+            to="/add_draft"
+            className="open-link"
+            style={{ border: "none" }}
+          >
+            <IoAddCircleOutline />
+          </Link>
           <section className="search">
             <FaSearch />
             <input
@@ -391,7 +399,7 @@ const Drafts = ({ token, handleShowNav }) => {
             <div>No result for your search</div>
           )}
         </div>
-        <div className="center">
+        {/* <div className="center">
           <div className="top">
             <div className="top-left">
               <span className="menu-btn desktop-block">
@@ -466,7 +474,7 @@ const Drafts = ({ token, handleShowNav }) => {
               </>
             )}
           </div>
-        </div>
+        </div> */}
       </>
     </div>
   );

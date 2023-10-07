@@ -12,6 +12,7 @@ import Invoice from "./pages/Invoice";
 import Toastify from "./components/Toastify";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import "./App.css";
+import AddModal from "./pages/AddModal";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
@@ -97,6 +98,12 @@ const App = () => {
             <Route
               path="/invoices"
               element={<Invoice handleShowNav={handleShowNav} />}
+            />
+          </Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/add_draft"
+              element={<AddModal handleShowNav={handleShowNav} />}
             />
           </Route>
           <Route path="/register" element={<SignUp />} />

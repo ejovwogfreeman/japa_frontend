@@ -7,6 +7,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
+import { Link } from "react-router-dom";
 
 const AddModal = ({ handleShowAddModal, token }) => {
   const [title, setTitle] = useState("");
@@ -64,7 +65,9 @@ const AddModal = ({ handleShowAddModal, token }) => {
     <div className="modal-form">
       <form onSubmit={handleFormSubmit}>
         <h3>CREATE DRAFT</h3>
-        <AiOutlineClose onClick={handleShowAddModal} />
+        <Link to="/drafts">
+          <AiOutlineClose onClick={handleShowAddModal} />
+        </Link>
         <div>
           <label htmlFor="title">Draft title</label>
           <input

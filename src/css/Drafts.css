@@ -4,9 +4,11 @@
 }
 
 .draft-container .left {
-  flex: 1;
+  /* flex: 1; */
+  position: relative;
   padding-top: 20px;
   padding-left: 40px;
+  width: 700px;
   height: 100vh;
   overflow-y: scroll;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -361,4 +363,20 @@
   .draft-container .center form {
     margin: 5px;
   }
+}
+
+.draft-container .left .open-link {
+  position: absolute;
+  right: 20px;
+  top: 7px;
+  border: 0px;
+  padding: 0px;
+}
+
+.draft-container .left .open-link:hover {
+  background-color: transparent;
+}
+
+.draft-container .left .open-link svg {
+  font-size: 30px;
 }
