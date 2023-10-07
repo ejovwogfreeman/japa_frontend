@@ -25,7 +25,7 @@ const Files = ({ handleShowNav }) => {
       <div className="left">
         <h3>All Files</h3>{" "}
         <Link to="/add_draft" className="open-link" style={{ border: "none" }}>
-          <AiOutlineCloudUpload style={{ fontSize: "20px" }} />
+          <AiOutlineCloudUpload style={{ fontSize: "25px" }} />
         </Link>
         <section className="search">
           <FaSearch />
