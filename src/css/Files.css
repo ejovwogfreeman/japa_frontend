@@ -10,6 +10,7 @@
   overflow-y: scroll;
   padding-left: 40px;
   width: 900px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 .files-container .left h3 {
   margin-left: 10px;
@@ -158,6 +159,7 @@
 .left .open-link {
   position: absolute;
   top: 5px;
+  right: 10px;
   border: 0px;
   padding: 0px;
   background-color: rgba(0, 0, 0, 0.1);
@@ -166,8 +168,4 @@
 
 .left .open-link:hover {
   background-color: transparent;
-}
-
-.left .open-link svg {
-  font-size: 20px;
 }

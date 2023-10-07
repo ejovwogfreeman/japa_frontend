@@ -367,16 +367,14 @@
 
 .left .open-link {
   position: absolute;
-  right: 0px;
   top: 5px;
+  right: 10px;
   border: 0px;
   padding: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
 }
 
 .left .open-link:hover {
   background-color: transparent;
-}
-
-.left .open-link svg {
-  font-size: 30px;
 }
