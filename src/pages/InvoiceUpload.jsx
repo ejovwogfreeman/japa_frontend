@@ -3,7 +3,7 @@ import "../css/Modal.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const FileUpload = () => {
+const InvoiceUpload = () => {
   return (
     <div className="modal-form">
       <form>
@@ -15,7 +15,7 @@ const FileUpload = () => {
         <div>
           <button>UPLOAD</button>
         </div>
-        <Link to="/files">
+        <Link to="/invoices">
           <AiOutlineClose />
         </Link>
       </form>
@@ -23,4 +23,4 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+export default InvoiceUpload;

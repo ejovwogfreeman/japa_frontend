@@ -209,7 +209,7 @@ const UpdateModal = ({ handleShowUpdateModal, token, drafts }) => {
 
       // Send the form data to your server
       const response = await axios.put(
-        "https://japaconsults.sammykingx.tech/drafts/update",
+        "https://japaconsults.sammykingx.tech/notes/update",
         form,
         {
           headers: {
@@ -219,8 +219,7 @@ const UpdateModal = ({ handleShowUpdateModal, token, drafts }) => {
       );
 
       toast.success("DRAFT UPDATED");
-      handleShowUpdateModal();
-      window.location.reload();
+      window.location.replace(`/draft/${params.id}`);
       console.log("Draft updated successfully:", response.data);
     } catch (error) {
       toast.error("DRAFT UPDATE FAILED");

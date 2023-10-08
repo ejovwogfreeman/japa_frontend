@@ -24,7 +24,11 @@ const Invoice = ({ handleShowNav }) => {
           <AiOutlineMenu onClick={handleShowNav} />
         </span>
         <h3>All Invoices</h3>{" "}
-        <Link to="/add_draft" className="open-link" style={{ border: "none" }}>
+        <Link
+          to="/create_invoice"
+          className="open-link"
+          style={{ border: "none" }}
+        >
           <AiOutlineCloudUpload style={{ fontSize: "20px" }} />
         </Link>
         <section className="search">

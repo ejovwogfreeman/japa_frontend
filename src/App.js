@@ -15,6 +15,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import "./App.css";
 import AddModal from "./pages/AddModal";
 import UpdateModal from "./pages/UpdateModal";
+import InvoiceUpload from "./pages/InvoiceUpload";
 import FileUpload from "./pages/FileUpload";
 import axios from "axios";
 // import { AiOutlineMenu } from "react-icons/ai";
@@ -142,6 +143,12 @@ const App = () => {
             <Route
               path="/invoices"
               element={<Invoice handleShowNav={handleShowNav} />}
+            />
+          </Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/create_invoice"
+              element={<InvoiceUpload handleShowNav={handleShowNav} />}
             />
           </Route>
           <Route element={<ProtectedRoutes />}>
