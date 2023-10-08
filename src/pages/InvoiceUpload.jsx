@@ -7,7 +7,7 @@ const InvoiceUpload = () => {
   return (
     <div className="modal-form">
       <form>
-        <h3>UPLOAD FILE</h3>
+        <h3>CREATE INVOICE</h3>
         <div>
           <label htmlFor="">Upload File</label>
           <input type="file" />
