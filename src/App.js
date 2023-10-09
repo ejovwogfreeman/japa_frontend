@@ -178,7 +178,9 @@ const App = () => {
           <Route element={<ProtectedRoutes />}>
             <Route
               path="/file_upload"
-              element={<FileUpload handleShowNav={handleShowNav} />}
+              element={
+                <FileUpload handleShowNav={handleShowNav} token={token} />
+              }
             />
           </Route>
           <Route path="/register" element={<SignUp />} />

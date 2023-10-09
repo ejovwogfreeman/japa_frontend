@@ -27,27 +27,27 @@ const SideNav = ({ showNav, handleShowNav }) => {
           <AiOutlineClose onClick={handleShowNav} />
         </div>
         <img src={logo} alt="" />
-        <Link to="/">
+        <Link onClick={handleShowNav} to="/">
           <AiOutlineHome />
           <span>Home</span>
         </Link>
-        <Link to="/users">
+        <Link onClick={handleShowNav} to="/users">
           <FaUsers />
           <span>Users</span>
         </Link>
-        <Link to="/message">
+        <Link onClick={handleShowNav} to="/message">
           <BsChatRightText />
           <span>Messages</span>
         </Link>
-        <Link to="/drafts">
+        <Link onClick={handleShowNav} to="/drafts">
           <RiDraftLine />
           <span>Drafts</span>
         </Link>
-        <Link to="/files">
+        <Link onClick={handleShowNav} to="/files">
           <BsFolder2 />
           <span>Files</span>
         </Link>
-        <Link to="/invoices">
+        <Link onClick={handleShowNav} to="/invoices">
           <LiaFileInvoiceDollarSolid />
           <span>Invoice</span>
         </Link>
