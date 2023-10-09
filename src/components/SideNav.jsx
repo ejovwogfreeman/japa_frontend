@@ -9,6 +9,7 @@ import logo from "../images/logo.png";
 import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const SideNav = ({ showNav, handleShowNav }) => {
   const navigate = useNavigate();
@@ -26,30 +27,30 @@ const SideNav = ({ showNav, handleShowNav }) => {
           <AiOutlineClose onClick={handleShowNav} />
         </div>
         <img src={logo} alt="" />
-        <a href="/">
+        <Link to="/">
           <AiOutlineHome />
           <span>Home</span>
-        </a>
-        <a href="/users">
+        </Link>
+        <Link to="/users">
           <FaUsers />
           <span>Users</span>
-        </a>
-        <a href="/message">
+        </Link>
+        <Link to="/message">
           <BsChatRightText />
           <span>Messages</span>
-        </a>
-        <a href="/drafts">
+        </Link>
+        <Link to="/drafts">
           <RiDraftLine />
           <span>Drafts</span>
-        </a>
-        <a href="/files">
+        </Link>
+        <Link to="/files">
           <BsFolder2 />
           <span>Files</span>
-        </a>
-        <a href="/invoices">
+        </Link>
+        <Link to="/invoices">
           <LiaFileInvoiceDollarSolid />
           <span>Invoice</span>
-        </a>
+        </Link>
         <span className="logout" onClick={logout}>
           <BiLogOutCircle />
           <span>Logout</span>
