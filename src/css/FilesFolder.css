@@ -14,3 +14,14 @@
   border-radius: 10px;
   height: 200px;
 }
+
+@media screen and (max-width: 800px) {
+  .files-container .left #grid-img-cont {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 500px) {
+  .files-container .left #grid-img-cont {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -58,7 +58,7 @@ const FilesFolder = ({ handleShowNav, images }) => {
             style={{ paddingRight: "10px" }}
           >
             {filteredImages.map((image) => (
-              <Link to={image.file_url} id="grid-img" style={{}}>
+              <Link to={image.file_url} id="grid-img" key={Math.random()}>
                 <img
                   src={`https://drive.google.com/uc?id=${image.file_id}`}
                   alt={image.name}
