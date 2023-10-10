@@ -269,7 +269,7 @@ const Draft = ({ token, handleShowNav, drafts }) => {
   const [isLoading, setIsLoading] = useState(false);
   console.log(params.id);
 
-  const handleDeleteDraft = async () => {
+  const handleDeleteDraft = async (id) => {
     try {
       setIsLoading(true);
 
@@ -288,7 +288,7 @@ const Draft = ({ token, handleShowNav, drafts }) => {
     }
   };
 
-  // Function to handle draft selection
+  console.log(headers);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -313,8 +313,6 @@ const Draft = ({ token, handleShowNav, drafts }) => {
   const handleShowDrafts = () => {
     setShowDrafts(!showDrafts);
   };
-
-  console.log(drafts);
 
   return (
     <div className="draft-container">
@@ -402,7 +400,9 @@ const Draft = ({ token, handleShowNav, drafts }) => {
                             fontSize: "25px",
                           }}
                         >
-                          <BsTrash onClick={handleDeleteDraft} />
+                          <BsTrash
+                            onClick={() => handleDeleteDraft(x.draft_id)}
+                          />
                         </span>
                       </div>
                     )}
