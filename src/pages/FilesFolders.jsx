@@ -73,12 +73,19 @@ const FilesFolder = ({ handleShowNav, token }) => {
           </section>
           <div className="images" style={{ paddingRight: "10px" }}>
             {filteredImages.map((image) => (
-              <iframe
-                src={image.file_url}
+              //   <iframe
+              //     src={image.file_url}
+              //     width="100%"
+              //     height="300"
+              //     style={{ marginBottom: "20px" }}
+              //   ></iframe>
+              <img
+                src={`https://drive.google.com/uc?id=${image.file_url}`}
+                alt={image.name}
                 width="100%"
                 height="300"
                 style={{ marginBottom: "20px" }}
-              ></iframe>
+              />
             ))}
           </div>
           {results.length === 0 && query !== "" && (
