@@ -100,18 +100,18 @@ const Files = ({ handleShowNav }) => {
   const { query, results, handleInputChange } = Search(files);
   // const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
-    axios
-      .get("YOUR_API_ENDPOINT")
-      .then((response) => {
-        // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
-        setImages(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching images:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
+  //   axios
+  //     .get("YOUR_API_ENDPOINT")
+  //     .then((response) => {
+  //       // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
+  //       setImages(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching images:", error);
+  //     });
+  // }, []);
 
   let folders = ["academics", "billing", "general", "messages"];
 

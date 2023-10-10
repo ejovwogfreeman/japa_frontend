@@ -86,7 +86,7 @@ const FilesFolder = ({ handleShowNav, token }) => {
           )}
         </div>
       )}
-      <div className="right">
+      {/* <div className="right">
         <div className="top">
           <h3>File 1</h3>
           <AiOutlineCloudUpload />
@@ -96,7 +96,7 @@ const FilesFolder = ({ handleShowNav, token }) => {
             <img src={image.url} alt={image.alt} key={image.id} />
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
