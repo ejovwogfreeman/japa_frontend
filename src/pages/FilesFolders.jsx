@@ -3,10 +3,7 @@ import "../css/Files.css";
 import { FaSearch } from "react-icons/fa";
 import { files } from "../data";
 import Search from "../components/Search";
-import { users } from "../data";
 import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
-import FileUpload from "./FileUpload";
-import { BsFolder2 } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios"; // Import Axios
 import Loader from "../components/Loader";
@@ -73,14 +70,8 @@ const FilesFolder = ({ handleShowNav, token }) => {
           </section>
           <div className="images" style={{ paddingRight: "10px" }}>
             {filteredImages.map((image) => (
-              //   <iframe
-              //     src={image.file_url}
-              //     width="100%"
-              //     height="300"
-              //     style={{ marginBottom: "20px" }}
-              //   ></iframe>
               <img
-                src={`https://drive.google.com/uc?id=${image.file_url}`}
+                src={`https://drive.google.com/uc?id=${image.file_id}`}
                 alt={image.name}
                 width="100%"
                 height="300"
@@ -93,17 +84,6 @@ const FilesFolder = ({ handleShowNav, token }) => {
           )}
         </div>
       )}
-      {/* <div className="right">
-        <div className="top">
-          <h3>File 1</h3>
-          <AiOutlineCloudUpload />
-        </div>
-        <div className="images">
-          {images.map((image) => (
-            <img src={image.url} alt={image.alt} key={image.id} />
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 };
