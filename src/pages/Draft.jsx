@@ -269,7 +269,7 @@ const Draft = ({ token, handleShowNav, drafts }) => {
   const [isLoading, setIsLoading] = useState(false);
   console.log(params.id);
 
-  const handleDeleteDraft = async (id) => {
+  const handleDeleteDraft = async () => {
     try {
       setIsLoading(true);
 
@@ -400,9 +400,7 @@ const Draft = ({ token, handleShowNav, drafts }) => {
                             fontSize: "25px",
                           }}
                         >
-                          <BsTrash
-                            onClick={() => handleDeleteDraft(x.draft_id)}
-                          />
+                          <BsTrash onClick={handleDeleteDraft} />
                         </span>
                       </div>
                     )}
