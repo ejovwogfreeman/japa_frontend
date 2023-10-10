@@ -98,7 +98,7 @@ import axios from "axios"; // Import Axios
 
 const Files = ({ handleShowNav }) => {
   const { query, results, handleInputChange } = Search(files);
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
 
   useEffect(() => {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
@@ -155,7 +155,7 @@ const Files = ({ handleShowNav }) => {
           <div>No result for your search</div>
         )}
       </div>
-      <div className="right">
+      {/* <div className="right">
         <div className="top">
           <h3>File 1</h3>
           <AiOutlineCloudUpload />
@@ -165,7 +165,7 @@ const Files = ({ handleShowNav }) => {
             <img src={image.url} alt={image.alt} key={image.id} />
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
