@@ -251,6 +251,7 @@ import { RiDraftLine } from "react-icons/ri";
 import DraftsModal from "./DraftsModal";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 // import { useNavigate } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
@@ -266,21 +267,20 @@ const Draft = ({ token, handleShowNav, drafts }) => {
   };
 
   const [isLoading, setIsLoading] = useState(false);
+  console.log(params.id);
 
-  const handleDeleteDraft = async (id) => {
-    console.log(id);
+  const handleDeleteDraft = async () => {
     try {
       setIsLoading(true);
 
       const response = await axios.delete(
-        `http://test.sammykingx.tech/notes/delete/?d_id=${id}`,
+        `http://test.sammykingx.tech/notes/delete/?d_id=${params.id}`,
         { headers }
       );
 
       setIsLoading(false);
       toast.success("Draft deleted successfully");
       navigate("/drafts");
-      window.location.reload();
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to delete draft");
@@ -346,54 +346,74 @@ const Draft = ({ token, handleShowNav, drafts }) => {
       )}
       <>
         <div className="left">
-          <span className="menu-btn">
-            <AiOutlineMenu onClick={handleShowNav} />
-          </span>
-          <h3>All Drafts</h3>{" "}
-          <Link
-            to={`/edit_draft/${params.id}`}
-            className="open-link"
-            style={{ border: "none", padding: "5px" }}
-          >
-            <IoCreateOutline style={{ fontSize: "25px" }} />
-          </Link>
-          <section className="search">
-            <FaSearch />
-            <input
-              type="text"
-              placeholder="Search..."
-              value={query}
-              onChange={handleInputChange}
-            />
-          </section>
-          {drafts.map((x) => (
-            <section key={Math.random()}>
-              {Number(x.draft_id) === Number(params.id) && (
-                <div
-                  className={`draft-item ${
-                    x === selectedDraft ? "selected" : ""
-                  }`}
-                  key={x.draft_id}
-                  onClick={() => handleDraftSelection(x)}
+          <>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <>
+                <span className="menu-btn">
+                  <AiOutlineMenu onClick={handleShowNav} />
+                </span>
+                <h3>All Drafts</h3>{" "}
+                <Link
+                  to={`/edit_draft/${params.id}`}
+                  className="open-link"
+                  style={{ border: "none", padding: "5px" }}
                 >
-                  <span className="top">
-                    <strong> {x.title}</strong>
-                  </span>
-                  <div
-                    style={{ marginLeft: "0px", padding: "10px 0px" }}
-                    dangerouslySetInnerHTML={{
-                      __html: x.content,
-                    }}
+                  <IoCreateOutline style={{ fontSize: "25px" }} />
+                </Link>
+                <section className="search">
+                  <FaSearch />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={query}
+                    onChange={handleInputChange}
                   />
-                  <span className="msg">{x.date_created}</span>
-                  {/* <BsTrash onClick={handleDeleteDraft} /> */}
-                </div>
-              )}
-            </section>
-          ))}
-          {results.length === 0 && query !== "" && (
-            <div>No result for your search</div>
-          )}
+                </section>
+                {drafts.map((x) => (
+                  <section key={Math.random()}>
+                    {Number(x.draft_id) === Number(params.id) && (
+                      <div
+                        className={`draft-item ${
+                          x === selectedDraft ? "selected" : ""
+                        }`}
+                        key={x.draft_id}
+                        onClick={() => handleDraftSelection(x)}
+                        style={{ position: "relative" }}
+                      >
+                        <h1 className="top">
+                          <span style={{ margin: "auto" }}>
+                            {x.title.toUpperCase()}
+                          </span>
+                        </h1>
+                        <div
+                          style={{ marginLeft: "0px", padding: "10px 0px" }}
+                          dangerouslySetInnerHTML={{
+                            __html: x.content,
+                          }}
+                        />
+                        <span className="msg">{x.date_created}</span>
+                        <span
+                          style={{
+                            position: "absolute",
+                            bottom: "0px",
+                            right: "10px",
+                            fontSize: "25px",
+                          }}
+                        >
+                          <BsTrash onClick={handleDeleteDraft} />
+                        </span>
+                      </div>
+                    )}
+                  </section>
+                ))}
+                {results.length === 0 && query !== "" && (
+                  <div>No result for your search</div>
+                )}
+              </>
+            )}
+          </>
         </div>
       </>
     </div>
