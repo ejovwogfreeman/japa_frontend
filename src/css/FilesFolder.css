@@ -3,6 +3,43 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 }
+.files-container .left #grid-img-cont div {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.files-container .left #grid-img-cont .delete-cont {
+  padding: 10px 0px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  border: none;
+}
+.files-container .left #grid-img-cont .delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  border: 1px solid rgba(256, 0, 0, 0.1);
+  border-radius: 3px;
+  padding: 3px;
+  cursor: pointer;
+  color: red;
+}
+
+.files-container .left #grid-img-cont .delete-btn:hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  border: 1px solid rgba(256, 0, 0, 0.1);
+  border-radius: 3px;
+  padding: 3px;
+  cursor: pointer;
+  color: white;
+  background-color: red;
+}
+
 .files-container .left #grid-img {
   border: none;
   padding: none;

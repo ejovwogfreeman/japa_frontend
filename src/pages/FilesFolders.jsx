@@ -5,7 +5,7 @@ import { files } from "../data";
 import Search from "../components/Search";
 import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios"; // Import Axios
+import { BsTrash } from "react-icons/bs";
 import Loader from "../components/Loader";
 
 const FilesFolder = ({ handleShowNav, images }) => {
@@ -58,12 +58,20 @@ const FilesFolder = ({ handleShowNav, images }) => {
             style={{ paddingRight: "10px" }}
           >
             {filteredImages.map((image) => (
-              <Link to={image.file_url} id="grid-img" key={Math.random()}>
-                <img
-                  src={`https://drive.google.com/uc?id=${image.file_id}`}
-                  alt={image.name}
-                />
-              </Link>
+              <div>
+                <Link to={image.file_url} id="grid-img" key={Math.random()}>
+                  <img
+                    src={`https://drive.google.com/uc?id=${image.file_id}`}
+                    alt={image.name}
+                  />
+                </Link>
+                <div className="delete-cont">
+                  <span className="delete-btn">
+                    <BsTrash />
+                    <span>DELETE FILE</span>
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
           {results.length === 0 && query !== "" && (
