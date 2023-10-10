@@ -274,7 +274,7 @@ const Draft = ({ token, handleShowNav, drafts }) => {
       setIsLoading(true);
 
       const response = await axios.delete(
-        `http://test.sammykingx.tech/notes/delete/?d_id=${params.id}`,
+        `https://test.sammykingx.tech/notes/delete/?d_id=${params.id}`,
         { headers }
       );
 
