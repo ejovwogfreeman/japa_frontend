@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../css/Files.css";
+import "../css/FilesFolder.css";
 import { FaSearch } from "react-icons/fa";
 import { files } from "../data";
 import Search from "../components/Search";
@@ -8,31 +8,15 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios"; // Import Axios
 import Loader from "../components/Loader";
 
-const FilesFolder = ({ handleShowNav, token }) => {
+const FilesFolder = ({ handleShowNav, images }) => {
   const { query, results, handleInputChange } = Search(files);
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
-
-  const params = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
-    axios
-      .get("https://japaconsults.sammykingx.tech/documents/myfiles", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
-        setImages(response.data);
-        setIsLoading(false); // Set isLoading to false when data is loaded
-      })
-      .catch((error) => {
-        console.error("Error fetching images:", error);
-        setIsLoading(false); // Set isLoading to false even if there's an error
-      });
-  }, []);
+    setIsLoading(files.length === 0);
+  }, [files]);
+
+  const params = useParams();
 
   const filteredImages = images.filter((x) => x.folder === params.folder);
 
@@ -68,15 +52,18 @@ const FilesFolder = ({ handleShowNav, token }) => {
               onChange={handleInputChange}
             />
           </section>
-          <div className="images" style={{ paddingRight: "10px" }}>
+          <div
+            className="images"
+            id="grid-img-cont"
+            style={{ paddingRight: "10px" }}
+          >
             {filteredImages.map((image) => (
-              <img
-                src={`https://drive.google.com/uc?id=${image.file_id}`}
-                alt={image.name}
-                width="100%"
-                height="300"
-                style={{ marginBottom: "20px" }}
-              />
+              <Link to={image.file_url} id="grid-img" style={{}}>
+                <img
+                  src={`https://drive.google.com/uc?id=${image.file_id}`}
+                  alt={image.name}
+                />
+              </Link>
             ))}
           </div>
           {results.length === 0 && query !== "" && (

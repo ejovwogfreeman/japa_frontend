@@ -64,28 +64,6 @@ const App = () => {
     Authorization: `Bearer ${token}`,
   };
 
-  // useEffect(() => {
-  //   const getDrafts = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         "https://japaconsults.sammykingx.tech/notes",
-  //         {
-  //           headers,
-  //         }
-  //       );
-
-  //       if (res.status === 200) {
-  //         setDrafts(res.data);
-  //       } else {
-  //         console.error("Failed to fetch drafts:", res.status, res.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching drafts:", error);
-  //     }
-  //   };
-
-  //   getDrafts();
-  // }, [headers]);
   useEffect(() => {
     const getDrafts = async () => {
       try {
@@ -109,7 +87,27 @@ const App = () => {
     getDrafts(); // This effect runs when `headers` changes
   }, [headers]);
 
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
+    axios
+      .get("https://japaconsults.sammykingx.tech/documents/myfiles", {
+        headers,
+      })
+      .then((response) => {
+        // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
+        setImages(response.data);
+        setIsLoading(false); // Set isLoading to false when data is loaded
+      })
+      .catch((error) => {
+        console.error("Error fetching images:", error);
+        setIsLoading(false); // Set isLoading to false even if there's an error
+      });
+  }, []);
+
   console.log(drafts);
+  console.log(images);
 
   const [showNav, setShowNav] = useState(false);
 
@@ -177,7 +175,11 @@ const App = () => {
                 <Route
                   path="/files/:folder"
                   element={
-                    <FilesFolder handleShowNav={handleShowNav} token={token} />
+                    <FilesFolder
+                      handleShowNav={handleShowNav}
+                      token={token}
+                      images={images}
+                    />
                   }
                 />
               </Route>

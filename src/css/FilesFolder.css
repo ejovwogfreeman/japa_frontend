@@ -1,0 +1,16 @@
+.files-container .left #grid-img-cont {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.files-container .left #grid-img {
+  border: none;
+  padding: none;
+  padding: 0px;
+}
+.files-container .left #grid-img img {
+  display: grid;
+  width: 100%;
+  border-radius: 10px;
+  height: 200px;
+}
