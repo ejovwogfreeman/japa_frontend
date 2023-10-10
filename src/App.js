@@ -18,6 +18,7 @@ import UpdateModal from "./pages/UpdateModal";
 import InvoiceUpload from "./pages/InvoiceUpload";
 import FileUpload from "./pages/FileUpload";
 import axios from "axios";
+import FilesFolder from "./pages/FilesFolders";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
@@ -131,6 +132,14 @@ const App = () => {
             <Route
               path="/files"
               element={<Files handleShowNav={handleShowNav} />}
+            />
+          </Route>
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/files/:folder"
+              element={
+                <FilesFolder handleShowNav={handleShowNav} token={token} />
+              }
             />
           </Route>
           <Route element={<ProtectedRoutes />}>
