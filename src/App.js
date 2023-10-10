@@ -19,6 +19,7 @@ import InvoiceUpload from "./pages/InvoiceUpload";
 import FileUpload from "./pages/FileUpload";
 import axios from "axios";
 import FilesFolder from "./pages/FilesFolders";
+import Loader from "./components/Loader";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
@@ -51,12 +52,40 @@ const App = () => {
     };
   }
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 1000);
+
   const [drafts, setDrafts] = useState([]);
 
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
+  // useEffect(() => {
+  //   const getDrafts = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         "https://japaconsults.sammykingx.tech/notes",
+  //         {
+  //           headers,
+  //         }
+  //       );
+
+  //       if (res.status === 200) {
+  //         setDrafts(res.data);
+  //       } else {
+  //         console.error("Failed to fetch drafts:", res.status, res.statusText);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching drafts:", error);
+  //     }
+  //   };
+
+  //   getDrafts();
+  // }, [headers]);
   useEffect(() => {
     const getDrafts = async () => {
       try {
@@ -77,8 +106,10 @@ const App = () => {
       }
     };
 
-    getDrafts();
+    getDrafts(); // This effect runs when `headers` changes
   }, [headers]);
+
+  console.log(drafts);
 
   const [showNav, setShowNav] = useState(false);
 
@@ -87,116 +118,126 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter>
-      <Toastify />
-      {showNav && <SideNav showNav={showNav} handleShowNav={handleShowNav} />}
-      <div className="main-component">
-        <Routes>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/"
-              element={<Home user={user} handleShowNav={handleShowNav} />}
-            />{" "}
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/message"
-              element={<Message token={token} handleShowNav={handleShowNav} />}
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/drafts"
-              element={
-                <Drafts
-                  token={token}
-                  handleShowNav={handleShowNav}
-                  drafts={drafts}
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <BrowserRouter>
+          <Toastify />
+          {showNav && (
+            <SideNav showNav={showNav} handleShowNav={handleShowNav} />
+          )}
+          <div className="main-component">
+            <Routes>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/"
+                  element={<Home user={user} handleShowNav={handleShowNav} />}
+                />{" "}
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/message"
+                  element={
+                    <Message token={token} handleShowNav={handleShowNav} />
+                  }
                 />
-              }
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/draft/:id"
-              element={
-                <Draft
-                  token={token}
-                  handleShowNav={handleShowNav}
-                  drafts={drafts}
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/drafts"
+                  element={
+                    <Drafts
+                      token={token}
+                      handleShowNav={handleShowNav}
+                      drafts={drafts}
+                    />
+                  }
                 />
-              }
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/files"
-              element={<Files handleShowNav={handleShowNav} />}
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/files/:folder"
-              element={
-                <FilesFolder handleShowNav={handleShowNav} token={token} />
-              }
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/users"
-              element={<Users handleShowNav={handleShowNav} />}
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/invoices"
-              element={<Invoice handleShowNav={handleShowNav} />}
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/create_invoice"
-              element={<InvoiceUpload handleShowNav={handleShowNav} />}
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/add_draft"
-              element={
-                <AddModal
-                  handleShowNav={handleShowNav}
-                  token={token}
-                  drafts={drafts}
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/draft/:id"
+                  element={
+                    <Draft
+                      token={token}
+                      handleShowNav={handleShowNav}
+                      drafts={drafts}
+                    />
+                  }
                 />
-              }
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/edit_draft/:id"
-              element={
-                <UpdateModal
-                  handleShowNav={handleShowNav}
-                  token={token}
-                  drafts={drafts}
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/files"
+                  element={<Files handleShowNav={handleShowNav} />}
                 />
-              }
-            />
-          </Route>
-          <Route element={<ProtectedRoutes />}>
-            <Route
-              path="/file_upload"
-              element={
-                <FileUpload handleShowNav={handleShowNav} token={token} />
-              }
-            />
-          </Route>
-          <Route path="/register" element={<SignUp />} />
-          <Route path="/login" element={<SignIn />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/files/:folder"
+                  element={
+                    <FilesFolder handleShowNav={handleShowNav} token={token} />
+                  }
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/users"
+                  element={<Users handleShowNav={handleShowNav} />}
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/invoices"
+                  element={<Invoice handleShowNav={handleShowNav} />}
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/create_invoice"
+                  element={<InvoiceUpload handleShowNav={handleShowNav} />}
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/add_draft"
+                  element={
+                    <AddModal
+                      handleShowNav={handleShowNav}
+                      token={token}
+                      drafts={drafts}
+                    />
+                  }
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/edit_draft/:id"
+                  element={
+                    <UpdateModal
+                      handleShowNav={handleShowNav}
+                      token={token}
+                      drafts={drafts}
+                    />
+                  }
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/file_upload"
+                  element={
+                    <FileUpload handleShowNav={handleShowNav} token={token} />
+                  }
+                />
+              </Route>
+              <Route path="/register" element={<SignUp />} />
+              <Route path="/login" element={<SignIn />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      )}
+    </>
   );
 };
 

@@ -46,7 +46,7 @@ const SignIn = () => {
       navigate("/");
       console.log("User logged in successfully:", response.data);
     } catch (error) {
-      toast.error("LOGIN FAILED");
+      toast.error(error.message ? error.message : "LOGIN FAILED");
       console.error("Error logging in:", error);
     } finally {
       setIsLoading(false); // Set loading state back to false when the request is done

@@ -250,7 +250,7 @@ import { toast } from "react-toastify";
 import { RiDraftLine } from "react-icons/ri";
 import DraftsModal from "./DraftsModal";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import jwt_decode from "jwt-decode";
 
@@ -260,35 +260,13 @@ const Draft = ({ token, handleShowNav, drafts }) => {
   const { query, results, handleInputChange } = Search(drafts);
 
   const params = useParams();
-
+  const navigate = useNavigate();
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  //   useEffect(() => {
-  //     const getDrafts = async () => {
-  //       try {
-  //         const res = await axios.get(
-  //           "https://japaconsults.sammykingx.tech/notes",
-  //           {
-  //             headers,
-  //           }
-  //         );
-
-  //         if (res.status === 200) {
-  //           setDrafts(res.data);
-  //         } else {
-  //           console.error("Failed to fetch drafts:", res.status, res.statusText);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching drafts:", error);
-  //       }
-  //     };
-
-  //     getDrafts();
-  //   }, [headers]);
-
   const [isLoading, setIsLoading] = useState(false);
+
   const handleDeleteDraft = async (id) => {
     console.log(id);
     try {
@@ -301,6 +279,7 @@ const Draft = ({ token, handleShowNav, drafts }) => {
 
       setIsLoading(false);
       toast.success("Draft deleted successfully");
+      navigate("/drafts");
       window.location.reload();
     } catch (error) {
       setIsLoading(false);
@@ -401,12 +380,13 @@ const Draft = ({ token, handleShowNav, drafts }) => {
                     <strong> {x.title}</strong>
                   </span>
                   <div
-                    style={{ marginLeft: "0px" }}
+                    style={{ marginLeft: "0px", padding: "10px 0px" }}
                     dangerouslySetInnerHTML={{
                       __html: x.content,
                     }}
                   />
                   <span className="msg">{x.date_created}</span>
+                  {/* <BsTrash onClick={handleDeleteDraft} /> */}
                 </div>
               )}
             </section>
@@ -415,82 +395,6 @@ const Draft = ({ token, handleShowNav, drafts }) => {
             <div>No result for your search</div>
           )}
         </div>
-        {/* <div className="center">
-          <div className="top">
-            <div className="top-left">
-              <span className="menu-btn desktop-block">
-                <AiOutlineMenu onClick={handleShowNav} />
-              </span>
-              <img src={img} alt="" />
-              <div className="text">
-                <span>ejovwogfreeman</span>
-                <span>online</span>
-              </div>
-            </div>
-            <div className="top-right">
-              <IoCreateOutline onClick={handleShowUpdateModal} />
-              <IoAddCircleOutline onClick={handleShowAddModal} />
-            </div>
-          </div>
-          <div className="chats">
-            {selectedDraft ? (
-              <div
-                className="receiver-color"
-                style={{
-                  padding: "10px",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  position: "relative",
-                }}
-              >
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: selectedDraft.content,
-                  }}
-                />
-                <small
-                  style={{
-                    position: "absolute",
-                    top: "5px",
-                    right: "5px",
-                    cursor: "pointer",
-                    fontSize: "20px",
-                  }}
-                >
-                  <BsTrash
-                    onClick={() => handleDeleteDraft(selectedDraft.draft_id)}
-                  />
-                </small>
-                <small
-                  style={{ position: "absolute", bottom: "5px", right: "10px" }}
-                >
-                  {selectedDraft.date_created}
-                </small>
-              </div>
-            ) : (
-              <>
-                <span className="draft-icon" onClick={handleShowDrafts}>
-                  <RiDraftLine />
-                  <span>ALL DRAFTS</span>
-                </span>
-                <div
-                  className="receiver-color"
-                  style={{
-                    padding: "10px",
-                    paddingTop: "30px",
-                    paddingBottom: "30px",
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <span>Please select a draft</span>
-                </div>
-              </>
-            )}
-          </div>
-        </div> */}
       </>
     </div>
   );

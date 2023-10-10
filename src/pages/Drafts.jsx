@@ -236,6 +236,179 @@
 
 // export default Drafts;
 
+// import React, { useState, useEffect } from "react";
+// import { FaSearch } from "react-icons/fa";
+// import "../css/Drafts.css";
+// import img from "../images/gb-profile.png";
+// import { IoCreateOutline, IoAddCircleOutline } from "react-icons/io5";
+// import Search from "../components/Search";
+// import AddModal from "./AddModal";
+// import UpdateModal from "./UpdateModal";
+// import { BsTrash } from "react-icons/bs";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+// import { RiDraftLine } from "react-icons/ri";
+// import DraftsModal from "./DraftsModal";
+// import { AiOutlineMenu } from "react-icons/ai";
+// import { Link } from "react-router-dom";
+// import Loader from "../components/Loader";
+// // import { useNavigate } from "react-router-dom";
+// // import jwt_decode from "jwt-decode";
+
+// const Drafts = ({ token, handleShowNav, drafts }) => {
+//   const [selectedDraft, setSelectedDraft] = useState(null); // Track the selected draft
+//   const { query, results, handleInputChange } = Search(drafts);
+
+//   const headers = {
+//     Authorization: `Bearer ${token}`,
+//   };
+
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const handleDeleteDraft = async (id) => {
+//     console.log(id);
+//     try {
+//       setIsLoading(true);
+
+//       const response = await axios.delete(
+//         `http://test.sammykingx.tech/notes/delete/?d_id=${id}`,
+//         { headers }
+//       );
+
+//       setIsLoading(false);
+//       toast.success("Draft deleted successfully");
+//       window.location.reload();
+//     } catch (error) {
+//       setIsLoading(false);
+//       toast.error("Failed to delete draft");
+//       console.error("Error deleting draft:", error);
+//     }
+//   };
+
+//   // Function to handle draft selection
+
+//   const [showAddModal, setShowAddModal] = useState(false);
+//   const [showUpdateModal, setShowUpdateModal] = useState(false);
+//   const [showDrafts, setShowDrafts] = useState(false);
+
+//   const handleDraftSelection = (draft) => {
+//     setSelectedDraft(draft);
+//     setShowDrafts(false);
+//   };
+
+//   const handleShowAddModal = () => {
+//     setShowAddModal(!showAddModal);
+//   };
+
+//   const handleShowUpdateModal = () => {
+//     if (!selectedDraft) {
+//       return toast.error("PLEASE SELECT A DRAFT");
+//     }
+//     setShowUpdateModal(!showUpdateModal);
+//   };
+
+//   const handleShowDrafts = () => {
+//     setShowDrafts(!showDrafts);
+//   };
+
+//   console.log(drafts);
+
+//   return (
+//     <div className="draft-container">
+//       {showAddModal && (
+//         <AddModal handleShowAddModal={handleShowAddModal} token={token} />
+//       )}
+//       {showDrafts && (
+//         <DraftsModal
+//           handleShowDrafts={handleShowDrafts}
+//           handleDraftSelection={handleDraftSelection}
+//           token={token}
+//           drafts={drafts}
+//         />
+//       )}
+//       {showUpdateModal && (
+//         <>
+//           {drafts.map(
+//             (draft) =>
+//               selectedDraft.draft_id === draft.draft_id && (
+//                 <UpdateModal
+//                   key={draft.draft_id}
+//                   draft={draft}
+//                   handleShowUpdateModal={handleShowUpdateModal}
+//                   token={token}
+//                 />
+//               )
+//           )}
+//         </>
+//       )}
+//       <>
+//         <div className="left">
+//           <>
+//             {isLoading ? (
+//               <Loader />
+//             ) : (
+//               <>
+//                 {" "}
+//                 <span className="menu-btn">
+//                   <AiOutlineMenu onClick={handleShowNav} />
+//                 </span>
+//                 <h3>All Drafts</h3>{" "}
+//                 <Link
+//                   to="/add_draft"
+//                   className="open-link"
+//                   style={{ border: "none", padding: "5px" }}
+//                 >
+//                   <IoAddCircleOutline style={{ fontSize: "25px" }} />
+//                 </Link>
+//                 <section className="search">
+//                   <FaSearch />
+//                   <input
+//                     type="text"
+//                     placeholder="Search..."
+//                     value={query}
+//                     onChange={handleInputChange}
+//                   />
+//                 </section>
+//                 {drafts.map((x) => (
+//                   <Link to={`/draft/${x.draft_id}`} key={Math.random()}>
+//                     <div
+//                       to="/"
+//                       className={`draft-item ${
+//                         x === selectedDraft ? "selected" : ""
+//                       }`}
+//                       key={x.draft_id}
+//                       onClick={() => handleDraftSelection(x)}
+//                       style={{ border: "none" }}
+//                     >
+//                       <span className="top">
+//                         <strong> {x.title}</strong>
+//                       </span>
+//                       <div
+//                         style={{ marginLeft: "0px" }}
+//                         dangerouslySetInnerHTML={{
+//                           __html:
+//                             x.content.slice(0, 50) +
+//                             ` ...<em><small><Link to='/draft/${x.draft_id}' style='color: blue'>see more</Link></small></em>`,
+//                         }}
+//                       />
+//                       <span className="msg">{x.date_created}</span>
+//                     </div>
+//                   </Link>
+//                 ))}
+//                 {results.length === 0 && query !== "" && (
+//                   <div>No result for your search</div>
+//                 )}
+//               </>
+//             )}
+//           </>
+//         </div>
+//       </>
+//     </div>
+//   );
+// };
+
+// export default Drafts;
+
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "../css/Drafts.css";
@@ -251,42 +424,22 @@ import { RiDraftLine } from "react-icons/ri";
 import DraftsModal from "./DraftsModal";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-// import jwt_decode from "jwt-decode";
+import Loader from "../components/Loader";
 
 const Drafts = ({ token, handleShowNav, drafts }) => {
-  // const [drafts, setDrafts] = useState([]);
-  const [selectedDraft, setSelectedDraft] = useState(null); // Track the selected draft
+  const [selectedDraft, setSelectedDraft] = useState(null);
   const { query, results, handleInputChange } = Search(drafts);
 
   const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  // useEffect(() => {
-  //   const getDrafts = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         "https://japaconsults.sammykingx.tech/notes",
-  //         {
-  //           headers,
-  //         }
-  //       );
+  const [isLoading, setIsLoading] = useState(drafts.length === 0);
 
-  //       if (res.status === 200) {
-  //         setDrafts(res.data);
-  //       } else {
-  //         console.error("Failed to fetch drafts:", res.status, res.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching drafts:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    setIsLoading(drafts.length === 0);
+  }, [drafts]);
 
-  //   getDrafts();
-  // }, [headers]);
-
-  const [isLoading, setIsLoading] = useState(false);
   const handleDeleteDraft = async (id) => {
     console.log(id);
     try {
@@ -306,8 +459,6 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
       console.error("Error deleting draft:", error);
     }
   };
-
-  // Function to handle draft selection
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -332,8 +483,6 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
   const handleShowDrafts = () => {
     setShowDrafts(!showDrafts);
   };
-
-  console.log(drafts);
 
   return (
     <div className="draft-container">
@@ -363,135 +512,63 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
           )}
         </>
       )}
-      <>
-        <div className="left">
-          <span className="menu-btn">
-            <AiOutlineMenu onClick={handleShowNav} />
-          </span>
-          <h3>All Drafts</h3>{" "}
-          <Link
-            to="/add_draft"
-            className="open-link"
-            style={{ border: "none", padding: "5px" }}
-          >
-            <IoAddCircleOutline style={{ fontSize: "25px" }} />
-          </Link>
-          <section className="search">
-            <FaSearch />
-            <input
-              type="text"
-              placeholder="Search..."
-              value={query}
-              onChange={handleInputChange}
-            />
-          </section>
-          {drafts.map((x) => (
-            <Link to={`/draft/${x.draft_id}`} key={Math.random()}>
-              <div
-                to="/"
-                className={`draft-item ${
-                  x === selectedDraft ? "selected" : ""
-                }`}
-                key={x.draft_id}
-                onClick={() => handleDraftSelection(x)}
-                style={{ border: "none" }}
-              >
-                <span className="top">
-                  <strong> {x.title}</strong>
-                </span>
-                <div
-                  style={{ marginLeft: "0px" }}
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      x.content.slice(0, 50) +
-                      ` ...<em><small><Link to='/draft/${x.draft_id}' style='color: blue'>see more</Link></small></em>`,
-                  }}
-                />
-                <span className="msg">{x.date_created}</span>
-              </div>
+      <div className="left">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <span className="menu-btn">
+              <AiOutlineMenu onClick={handleShowNav} />
+            </span>
+            <h3>All Drafts</h3>{" "}
+            <Link
+              to="/add_draft"
+              className="open-link"
+              style={{ border: "none", padding: "5px" }}
+            >
+              <IoAddCircleOutline style={{ fontSize: "25px" }} />
             </Link>
-          ))}
-          {results.length === 0 && query !== "" && (
-            <div>No result for your search</div>
-          )}
-        </div>
-        {/* <div className="center">
-          <div className="top">
-            <div className="top-left">
-              <span className="menu-btn desktop-block">
-                <AiOutlineMenu onClick={handleShowNav} />
-              </span>
-              <img src={img} alt="" />
-              <div className="text">
-                <span>ejovwogfreeman</span>
-                <span>online</span>
-              </div>
-            </div>
-            <div className="top-right">
-              <IoCreateOutline onClick={handleShowUpdateModal} />
-              <IoAddCircleOutline onClick={handleShowAddModal} />
-            </div>
-          </div>
-          <div className="chats">
-            {selectedDraft ? (
-              <div
-                className="receiver-color"
-                style={{
-                  padding: "10px",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  position: "relative",
-                }}
-              >
+            <section className="search">
+              <FaSearch />
+              <input
+                type="text"
+                placeholder="Search..."
+                value={query}
+                onChange={handleInputChange}
+              />
+            </section>
+            {drafts.map((x) => (
+              <Link to={`/draft/${x.draft_id}`} key={Math.random()}>
                 <div
-                  dangerouslySetInnerHTML={{
-                    __html: selectedDraft.content,
-                  }}
-                />
-                <small
-                  style={{
-                    position: "absolute",
-                    top: "5px",
-                    right: "5px",
-                    cursor: "pointer",
-                    fontSize: "20px",
-                  }}
+                  to="/"
+                  className={`draft-item ${
+                    x === selectedDraft ? "selected" : ""
+                  }`}
+                  key={x.draft_id}
+                  onClick={() => handleDraftSelection(x)}
+                  style={{ border: "none" }}
                 >
-                  <BsTrash
-                    onClick={() => handleDeleteDraft(selectedDraft.draft_id)}
+                  <span className="top">
+                    <strong> {x.title}</strong>
+                  </span>
+                  <div
+                    style={{ marginLeft: "0px" }}
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        x.content.slice(0, 50) +
+                        ` ...<em><small><Link to='/draft/${x.draft_id}' style='color: blue'>see more</Link></small></em>`,
+                    }}
                   />
-                </small>
-                <small
-                  style={{ position: "absolute", bottom: "5px", right: "10px" }}
-                >
-                  {selectedDraft.date_created}
-                </small>
-              </div>
-            ) : (
-              <>
-                <span className="draft-icon" onClick={handleShowDrafts}>
-                  <RiDraftLine />
-                  <span>ALL DRAFTS</span>
-                </span>
-                <div
-                  className="receiver-color"
-                  style={{
-                    padding: "10px",
-                    paddingTop: "30px",
-                    paddingBottom: "30px",
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <span>Please select a draft</span>
+                  <span className="msg">{x.date_created}</span>
                 </div>
-              </>
+              </Link>
+            ))}
+            {results.length === 0 && query !== "" && (
+              <div>No result for your search</div>
             )}
-          </div>
-        </div> */}
-      </>
+          </>
+        )}
+      </div>
     </div>
   );
 };
