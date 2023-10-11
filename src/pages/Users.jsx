@@ -33,7 +33,7 @@ const Users = ({ handleShowNav }) => {
         </section>
         <div className="files">
           {results.map((x) => (
-            <Link to="" key={Math.random()}>
+            <Link to={`/user/${Math.random()}`} key={Math.random()}>
               <img src={x.img} alt="" />
               <div style={{ marginLeft: "10px" }}>
                 <span className="top">
