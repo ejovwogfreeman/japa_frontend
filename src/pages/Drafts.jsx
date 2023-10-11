@@ -110,7 +110,7 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
                   style={{ border: "none" }}
                 >
                   <span className="top">
-                    <strong> {x.title}</strong>
+                    <strong> {x.title.toUpperCase()}</strong>
                   </span>
                   <div
                     style={{ marginLeft: "0px" }}

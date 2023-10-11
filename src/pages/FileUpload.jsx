@@ -49,7 +49,6 @@ import axios from "axios"; // Import Axios
 const FileUpload = ({ token }) => {
   console.log(token);
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
   const [folderName, setFolderName] = useState("academics");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,17 +58,16 @@ const FileUpload = ({ token }) => {
   };
 
   const handleUpload = () => {
-    if (!file || !fileName) {
+    if (!file) {
       toast.error("PLEASE FILL ALL FIELDS");
       return;
     }
 
-    console.log({ file, fileName, folderName });
+    console.log({ file, folderName });
 
     setIsLoading(true);
 
     const formData = new FormData();
-    formData.append("file_name", fileName);
     formData.append("file", file);
 
     axios
@@ -104,19 +102,7 @@ const FileUpload = ({ token }) => {
       <form>
         <h3>UPLOAD FILE</h3>
         <div>
-          <label htmlFor="fileName">File Name</label>
-          <input
-            type="text"
-            id="fileName"
-            value={fileName}
-            onChange={(e) => setFileName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="file">Upload File</label>
-          <input type="file" id="file" onChange={handleFileChange} />
-        </div>
-        <div>
+          <label htmlFor="file">Folder Name</label>
           <select
             value={folderName}
             onChange={(e) => setFolderName(e.target.value)}
@@ -126,6 +112,10 @@ const FileUpload = ({ token }) => {
             <option value="general">GENERAL</option>
             <option value="messages">MESSAGES</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="file">Upload File</label>
+          <input type="file" id="file" onChange={handleFileChange} />
         </div>
         <div>
           <button type="button" onClick={handleUpload} disabled={isLoading}>

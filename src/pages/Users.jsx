@@ -7,7 +7,7 @@ import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
 import Upload from "./FileUpload";
 import { Link } from "react-router-dom";
 
-const Users = ({ handleShowNav }) => {
+const Users = ({ handleShowNav, users }) => {
   const { query, results, handleInputChange } = Search(users);
 
   const [modal, setModal] = useState(false);
@@ -32,13 +32,13 @@ const Users = ({ handleShowNav }) => {
           />
         </section>
         <div className="files">
-          {results.map((x) => (
+          {users.map((x) => (
             <Link to={`/user/${Math.random()}`} key={Math.random()}>
               <img src={x.img} alt="" />
               <div style={{ marginLeft: "10px" }}>
                 <span className="top">
-                  <span>{x.username}</span>
-                  <span>{x.time}</span>
+                  <span>{x.name}</span>
+                  <span>{x.email}</span>
                 </span>
                 <span className="msg">{x.msg}</span>
               </div>

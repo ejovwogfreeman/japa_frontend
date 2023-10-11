@@ -53,7 +53,7 @@
 }
 .users-container .left .files span:last-of-type {
   font-size: 12px;
-  font-style: italic;
+  font-weight: normal;
 }
 
 .users-container .left .files svg {

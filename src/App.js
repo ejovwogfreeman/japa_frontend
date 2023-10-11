@@ -207,7 +207,9 @@ const App = () => {
               <Route element={<ProtectedRoutes />}>
                 <Route
                   path="/users"
-                  element={<Users handleShowNav={handleShowNav} />}
+                  element={
+                    <Users handleShowNav={handleShowNav} users={users} />
+                  }
                 />
               </Route>
               <Route element={<ProtectedRoutes />}>

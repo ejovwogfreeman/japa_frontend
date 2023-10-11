@@ -31,13 +31,13 @@ const FilesFolder = ({ handleShowNav, images, token }) => {
       setIsLoading(true);
 
       const response = await axios.delete(
-        `https://japaconsults.sammykingx.tech/documents/removeMyFile/${id}`,
+        `https://japaconsults.sammykingx.tech/documents/removeMyFile/?fileId=${id}`,
         { headers }
       );
 
       setIsLoading(false);
       toast.success("File deleted successfully");
-      navigate("/drafts");
+      navigate("/files");
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to delete file");
