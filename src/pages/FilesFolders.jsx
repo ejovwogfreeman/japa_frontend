@@ -4,11 +4,13 @@ import { FaSearch } from "react-icons/fa";
 import { files } from "../data";
 import Search from "../components/Search";
 import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { BsTrash } from "react-icons/bs";
 import Loader from "../components/Loader";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const FilesFolder = ({ handleShowNav, images }) => {
+const FilesFolder = ({ handleShowNav, images, token }) => {
   const { query, results, handleInputChange } = Search(files);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,14 +19,31 @@ const FilesFolder = ({ handleShowNav, images }) => {
   }, [files]);
 
   const params = useParams();
+  const navigate = useNavigate();
 
   const filteredImages = images.filter((x) => x.folder === params.folder);
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
-  console.log(params.folder);
+  const handleDelete = async (id) => {
+    try {
+      setIsLoading(true);
 
-  console.log(filteredImages);
+      const response = await axios.delete(
+        `https://japaconsults.sammykingx.tech/documents/removeMyFile/${id}`,
+        { headers }
+      );
 
-  console.log(images);
+      setIsLoading(false);
+      toast.success("File deleted successfully");
+      navigate("/drafts");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to delete file");
+      console.error("Error deleting file:", error);
+    }
+  };
 
   return (
     <div className="files-container">
@@ -57,22 +76,32 @@ const FilesFolder = ({ handleShowNav, images }) => {
             id="grid-img-cont"
             style={{ paddingRight: "10px" }}
           >
-            {filteredImages.map((image) => (
-              <div>
-                <Link to={image.file_url} id="grid-img" key={Math.random()}>
-                  <img
-                    src={`https://drive.google.com/uc?id=${image.file_id}`}
-                    alt={image.name}
-                  />
-                </Link>
-                <div className="delete-cont">
-                  <span className="delete-btn">
-                    <BsTrash />
-                    <span>DELETE FILE</span>
-                  </span>
-                </div>
-              </div>
-            ))}
+            {filteredImages.length <= 0 ? (
+              <h2>No files here yet</h2>
+            ) : (
+              <>
+                {" "}
+                {filteredImages.map((image) => (
+                  <div>
+                    <Link to={image.file_url} id="grid-img" key={Math.random()}>
+                      <img
+                        src={`https://drive.google.com/uc?id=${image.file_id}`}
+                        alt={image.name}
+                      />
+                    </Link>
+                    <div className="delete-cont">
+                      <span
+                        className="delete-btn"
+                        onClick={() => handleDelete(image.file_id)}
+                      >
+                        <BsTrash />
+                        <span>DELETE FILE</span>
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
           {results.length === 0 && query !== "" && (
             <div>No result for your search</div>

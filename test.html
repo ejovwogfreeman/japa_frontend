@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let token =
+        "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJFam92d28gR29kYmxlc3MiLCJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlzX3ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE2OTcwMDE2NDIsImV4cCI6MTY5NzAwMzQ0Mn0.G9Xj8GZdxVQ_2zJspNsRESw0qpkgOXkYu2mOYnXVwMZdQkFCe8Oel0iPkmJpXKE-";
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      console.log(decodedToken.exp);
+      console.log(currentTime);
+      console.log(decodedToken.exp < currentTime);
+    </script>
+  </body>
+</html>

@@ -20,6 +20,8 @@ import FileUpload from "./pages/FileUpload";
 import axios from "axios";
 import FilesFolder from "./pages/FilesFolders";
 import Loader from "./components/Loader";
+import Profile from "./pages/Profile";
+import User from "./pages/User";
 // import { AiOutlineMenu } from "react-icons/ai";
 // import { GrClose } from "react-icons/gr";
 
@@ -104,10 +106,29 @@ const App = () => {
         console.error("Error fetching images:", error);
         setIsLoading(false); // Set isLoading to false even if there's an error
       });
-  }, []);
+  }, [images]);
+
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
+    axios
+      .get("https://japaconsults.sammykingx.tech/user", {
+        headers,
+      })
+      .then((response) => {
+        // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
+        setUsers(response.data);
+        setIsLoading(false); // Set isLoading to false when data is loaded
+      })
+      .catch((error) => {
+        console.error("Error fetching images:", error);
+        setIsLoading(false); // Set isLoading to false even if there's an error
+      });
+  }, [users]);
 
   console.log(drafts);
   console.log(images);
+  console.log(users);
 
   const [showNav, setShowNav] = useState(false);
 
@@ -187,6 +208,18 @@ const App = () => {
                 <Route
                   path="/users"
                   element={<Users handleShowNav={handleShowNav} />}
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/user/:id"
+                  element={<User handleShowNav={handleShowNav} />}
+                />
+              </Route>
+              <Route element={<ProtectedRoutes />}>
+                <Route
+                  path="/profile"
+                  element={<Profile handleShowNav={handleShowNav} />}
                 />
               </Route>
               <Route element={<ProtectedRoutes />}>

@@ -261,8 +261,6 @@ const Message = ({ token, handleShowNav }) => {
             </div>
           </div>
           <div className="top-right">
-            {/* <IoCallOutline />
-            <HiOutlineVideoCamera /> */}
             <AiOutlineMenu onClick={handleShowNav} />
           </div>
         </div>

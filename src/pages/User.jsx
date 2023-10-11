@@ -11,7 +11,7 @@ import Search from "../components/Search";
 import io from "socket.io-client"; // Import Socket.io;
 import { AiOutlineMenu } from "react-icons/ai";
 
-const Profile = ({ token, handleShowNav }) => {
+const User = ({ token, handleShowNav }) => {
   return (
     <div className="profile-container">
       <span className="menu-btn">
@@ -37,4 +37,4 @@ const Profile = ({ token, handleShowNav }) => {
   );
 };
 
-export default Profile;
+export default User;

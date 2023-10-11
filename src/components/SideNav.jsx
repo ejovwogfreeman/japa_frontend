@@ -10,6 +10,7 @@ import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 
 const SideNav = ({ showNav, handleShowNav }) => {
   const navigate = useNavigate();
@@ -50,6 +51,10 @@ const SideNav = ({ showNav, handleShowNav }) => {
         <Link onClick={handleShowNav} to="/invoices">
           <LiaFileInvoiceDollarSolid />
           <span>Invoice</span>
+        </Link>
+        <Link onClick={handleShowNav} to="/profile">
+          <CgProfile />
+          <span>Profile</span>
         </Link>
         <span className="logout" onClick={logout}>
           <BiLogOutCircle />
