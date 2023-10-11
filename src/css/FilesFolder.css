@@ -19,23 +19,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
+  width: 130px;
   border: 1px solid rgba(256, 0, 0, 0.1);
   border-radius: 3px;
   padding: 3px;
   cursor: pointer;
   color: red;
 }
+.files-container .left #grid-img-cont .delete-btn svg {
+  margin-right: 3px;
+  margin-bottom: 2px;
+}
 
 .files-container .left #grid-img-cont .delete-btn:hover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  border: 1px solid rgba(256, 0, 0, 0.1);
-  border-radius: 3px;
-  padding: 3px;
-  cursor: pointer;
   color: white;
   background-color: red;
 }
