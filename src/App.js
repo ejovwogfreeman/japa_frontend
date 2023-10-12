@@ -22,36 +22,17 @@ import FilesFolder from "./pages/FilesFolders";
 import Loader from "./components/Loader";
 import Profile from "./pages/Profile";
 import User from "./pages/User";
-// import { AiOutlineMenu } from "react-icons/ai";
-// import { GrClose } from "react-icons/gr";
+import jwtDecode from "jwt-decode";
 
 const App = () => {
-  const [user, setUser] = useState({});
   var localUser = JSON.parse(sessionStorage.getItem("user"));
   let token;
+  let user;
   if (localUser) {
     token = localUser.access_token ? localUser.access_token : null;
-    const getUser = async () => {
-      // Replace 'your_token_here' with the actual token value
-      const token_id = token;
+    const token_id = token;
 
-      // Create a Headers object and set the Authorization header
-      const headers = new Headers();
-      headers.append("Authorization", `Bearer ${token_id}`);
-
-      // Create the fetch request with the headers
-      const res = await fetch(
-        "https://japaconsults.sammykingx.tech/user/profile",
-        {
-          method: "GET",
-          headers: headers,
-        }
-      );
-
-      const data = await res.json();
-      setUser(data);
-      getUser();
-    };
+    user = jwtDecode(token_id);
   }
 
   const [isLoading, setIsLoading] = useState(true);
@@ -86,49 +67,41 @@ const App = () => {
       }
     };
 
-    getDrafts(); // This effect runs when `headers` changes
-  }, [headers]);
+    getDrafts();
+  }, [token]);
 
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
     axios
       .get("https://japaconsults.sammykingx.tech/documents/myfiles", {
         headers,
       })
       .then((response) => {
-        // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
         setImages(response.data);
-        setIsLoading(false); // Set isLoading to false when data is loaded
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching images:", error);
-        setIsLoading(false); // Set isLoading to false even if there's an error
+        setIsLoading(false);
       });
-  }, [images]);
+  }, [token]);
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint that provides the images
     axios
       .get("https://japaconsults.sammykingx.tech/user", {
         headers,
       })
       .then((response) => {
-        // Assuming the API response contains an array of image objects with 'url', 'alt', and 'id' properties
         setUsers(response.data);
-        setIsLoading(false); // Set isLoading to false when data is loaded
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching images:", error);
-        setIsLoading(false); // Set isLoading to false even if there's an error
+        setIsLoading(false);
       });
-  }, [users]);
-
-  console.log(drafts);
-  console.log(images);
-  console.log(users);
+  }, [token]);
 
   const [showNav, setShowNav] = useState(false);
 
@@ -136,6 +109,7 @@ const App = () => {
     setShowNav(!showNav);
   };
 
+  // console.log(user);
   return (
     <>
       {isLoading ? (
@@ -144,7 +118,11 @@ const App = () => {
         <BrowserRouter>
           <Toastify />
           {showNav && (
-            <SideNav showNav={showNav} handleShowNav={handleShowNav} />
+            <SideNav
+              showNav={showNav}
+              handleShowNav={handleShowNav}
+              user={user}
+            />
           )}
           <div className="main-component">
             <Routes>
@@ -221,7 +199,9 @@ const App = () => {
               <Route element={<ProtectedRoutes />}>
                 <Route
                   path="/profile"
-                  element={<Profile handleShowNav={handleShowNav} />}
+                  element={
+                    <Profile user={user} handleShowNav={handleShowNav} />
+                  }
                 />
               </Route>
               <Route element={<ProtectedRoutes />}>

@@ -54,7 +54,7 @@
 }
 .files-container .left .files span:last-of-type {
   font-size: 12px;
-  font-style: italic;
+  /* font-style: italic; */
 }
 
 .files-container .left .files svg {
@@ -121,7 +121,7 @@
 }
 
 .files-container .left a:hover {
-  background-color: rgba(0, 0, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .files-container .left a img {

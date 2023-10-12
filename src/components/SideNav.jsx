@@ -12,7 +12,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 
-const SideNav = ({ showNav, handleShowNav }) => {
+const SideNav = ({ showNav, handleShowNav, user }) => {
   const navigate = useNavigate();
   const logout = () => {
     sessionStorage.removeItem("user");
@@ -32,10 +32,12 @@ const SideNav = ({ showNav, handleShowNav }) => {
           <AiOutlineHome />
           <span>Home</span>
         </Link>
-        <Link onClick={handleShowNav} to="/users">
-          <FaUsers />
-          <span>Users</span>
-        </Link>
+        {user.role !== "user" && (
+          <Link onClick={handleShowNav} to="/users">
+            <FaUsers />
+            <span>Users</span>
+          </Link>
+        )}
         <Link onClick={handleShowNav} to="/message">
           <BsChatRightText />
           <span>Messages</span>

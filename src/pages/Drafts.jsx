@@ -18,6 +18,8 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
   const [isLoading, setIsLoading] = useState(drafts.length === 0);
 
   useEffect(() => {
+    if (drafts.length === 0) {
+    }
     setIsLoading(drafts.length === 0);
   }, [drafts]);
 

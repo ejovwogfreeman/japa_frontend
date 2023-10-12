@@ -146,7 +146,6 @@ const Files = ({ handleShowNav }) => {
               </span>
               <div>
                 <span>{x}</span>
-                <span>3 files</span>
               </div>
             </Link>
           ))}
