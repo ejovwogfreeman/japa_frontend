@@ -17,12 +17,6 @@ const Home = ({ user, handleShowNav }) => {
     navigate("/login");
   };
 
-  // const [tog, setTog]=useState
-
-  // const handleTog = ()=> {
-  //   window.scrollY > 200?
-  // }
-
   const cards = [
     { id: 1, icon: <FaUsers />, text: "Members", num: 55 },
     { id: 2, icon: <BsFolder2 />, text: "Uploads", num: 55 },
@@ -37,12 +31,12 @@ const Home = ({ user, handleShowNav }) => {
       <div className="top">
         <div>
           <h2>Dashboard</h2>
-          <span>Welcome {user.name}</span>
+          <span>Welcome {user && user.name}</span>
         </div>
         <div className="profile-img">
           <img src={img} alt="" />
           <div className="account">
-            <Link>Account</Link>
+            <Link to="/profile">Account</Link>
             <span className="a" onClick={logoutUser}>
               Logout
             </span>

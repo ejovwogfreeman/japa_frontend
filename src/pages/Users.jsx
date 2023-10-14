@@ -32,18 +32,24 @@ const Users = ({ handleShowNav, users }) => {
           />
         </section>
         <div className="files">
-          {users.map((x) => (
-            <Link to={`/user/${Math.random()}`} key={Math.random()}>
-              <img src={x.img} alt="" />
-              <div style={{ marginLeft: "10px" }}>
-                <span className="top">
-                  <span>{x.name}</span>
-                  <span>{x.email}</span>
-                </span>
-                <span className="msg">{x.msg}</span>
-              </div>
-            </Link>
-          ))}
+          {users.length <= 0 ? (
+            <h2>No Users</h2>
+          ) : (
+            <>
+              {users.map((x) => (
+                <Link to={`/user/${Math.random()}`} key={Math.random()}>
+                  <img src={x.img} alt="" />
+                  <div style={{ marginLeft: "10px" }}>
+                    <span className="top">
+                      <span>{x.name}</span>
+                      <span>{x.email}</span>
+                    </span>
+                    <span className="msg">{x.msg}</span>
+                  </div>
+                </Link>
+              ))}
+            </>
+          )}
         </div>
         {results.length === 0 && query !== "" && (
           <div>No result for your search</div>

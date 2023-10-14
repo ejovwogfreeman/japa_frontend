@@ -12,10 +12,12 @@ import { toast } from "react-toastify";
 
 const FilesFolder = ({ handleShowNav, images, token }) => {
   const { query, results, handleInputChange } = Search(files);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(files.length === 0);
+    if (!images) {
+      setIsLoading(true);
+    }
   }, [files]);
 
   const params = useParams();

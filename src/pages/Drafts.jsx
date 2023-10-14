@@ -3,82 +3,28 @@ import { FaSearch } from "react-icons/fa";
 import "../css/Drafts.css";
 import { IoAddCircleOutline } from "react-icons/io5";
 import Search from "../components/Search";
-import AddModal from "./AddModal";
-import UpdateModal from "./UpdateModal";
-import { toast } from "react-toastify";
-import DraftsModal from "./DraftsModal";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
-const Drafts = ({ token, handleShowNav, drafts }) => {
+const Drafts = ({ handleShowNav, drafts }) => {
   const [selectedDraft, setSelectedDraft] = useState(null);
   const { query, results, handleInputChange } = Search(drafts);
 
-  const [isLoading, setIsLoading] = useState(drafts.length === 0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (drafts.length === 0) {
+    if (!drafts) {
+      setIsLoading(true);
     }
-    setIsLoading(drafts.length === 0);
   }, [drafts]);
-
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [showDrafts, setShowDrafts] = useState(false);
-
-  const handleDraftSelection = (draft) => {
-    setSelectedDraft(draft);
-    setShowDrafts(false);
-  };
-
-  const handleShowAddModal = () => {
-    setShowAddModal(!showAddModal);
-  };
-
-  const handleShowUpdateModal = () => {
-    if (!selectedDraft) {
-      return toast.error("PLEASE SELECT A DRAFT");
-    }
-    setShowUpdateModal(!showUpdateModal);
-  };
-
-  const handleShowDrafts = () => {
-    setShowDrafts(!showDrafts);
-  };
 
   return (
     <div className="draft-container">
-      {showAddModal && (
-        <AddModal handleShowAddModal={handleShowAddModal} token={token} />
-      )}
-      {showDrafts && (
-        <DraftsModal
-          handleShowDrafts={handleShowDrafts}
-          handleDraftSelection={handleDraftSelection}
-          token={token}
-          drafts={drafts}
-        />
-      )}
-      {showUpdateModal && (
-        <>
-          {drafts.map(
-            (draft) =>
-              selectedDraft.draft_id === draft.draft_id && (
-                <UpdateModal
-                  key={draft.draft_id}
-                  draft={draft}
-                  handleShowUpdateModal={handleShowUpdateModal}
-                  token={token}
-                />
-              )
-          )}
-        </>
-      )}
-      <div className="left">
-        {isLoading ? (
-          <Loader />
-        ) : (
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="left">
           <>
             <span className="menu-btn">
               <AiOutlineMenu onClick={handleShowNav} />
@@ -100,38 +46,43 @@ const Drafts = ({ token, handleShowNav, drafts }) => {
                 onChange={handleInputChange}
               />
             </section>
-            {drafts.map((x) => (
-              <Link to={`/draft/${x.draft_id}`} key={Math.random()}>
-                <div
-                  to="/"
-                  className={`draft-item ${
-                    x === selectedDraft ? "selected" : ""
-                  }`}
-                  key={x.draft_id}
-                  onClick={() => handleDraftSelection(x)}
-                  style={{ border: "none" }}
-                >
-                  <span className="top">
-                    <strong> {x.title.toUpperCase()}</strong>
-                  </span>
-                  <div
-                    style={{ marginLeft: "0px" }}
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        x.content.slice(0, 50) +
-                        ` ...<em><small><Link to='/draft/${x.draft_id}' style='color: blue'>see more</Link></small></em>`,
-                    }}
-                  />
-                  <span className="msg">{x.date_created}</span>
-                </div>
-              </Link>
-            ))}
-            {results.length === 0 && query !== "" && (
-              <div>No result for your search</div>
+            {drafts.length <= 0 ? (
+              <h2>No drafts yet</h2>
+            ) : (
+              <>
+                {drafts
+                  .slice()
+                  .reverse() // Reverse the order of drafts
+                  .map((x) => (
+                    <Link to={`/draft/${x.draft_id}`} key={x.draft_id}>
+                      <div
+                        className="draft-item"
+                        key={x.draft_id}
+                        style={{ border: "none", cursor: "pointer" }}
+                      >
+                        <span className="top">
+                          <strong> {x.title.toUpperCase()}</strong>
+                        </span>
+                        <div
+                          style={{ marginLeft: "0px" }}
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              x.content.slice(0, 50) +
+                              ` ...<em><small><Link to='/draft/${x.draft_id}'>see more</Link></small></em>`,
+                          }}
+                        />
+                        <span className="msg">{x.date_created}</span>
+                      </div>
+                    </Link>
+                  ))}
+                {results.length === 0 && query !== "" && (
+                  <div>No result for your search</div>
+                )}
+              </>
             )}
           </>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -105,6 +105,8 @@ const App = () => {
 
   const [showNav, setShowNav] = useState(false);
 
+  console.log(users, drafts, images);
+
   const handleShowNav = () => {
     setShowNav(!showNav);
   };
