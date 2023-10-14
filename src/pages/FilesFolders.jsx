@@ -29,9 +29,8 @@ const FilesFolder = ({ handleShowNav, images, token }) => {
   };
 
   const handleDelete = async (id) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-
       const response = await axios.delete(
         `https://japaconsults.sammykingx.tech/documents/removeMyFile/?fileId=${id}`,
         { headers }
@@ -39,7 +38,7 @@ const FilesFolder = ({ handleShowNav, images, token }) => {
 
       setIsLoading(false);
       toast.success("File deleted successfully");
-      navigate("/files");
+      window.location.replace("/files");
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to delete file");
@@ -82,9 +81,8 @@ const FilesFolder = ({ handleShowNav, images, token }) => {
               <h2>No files here yet</h2>
             ) : (
               <>
-                {" "}
                 {filteredImages.map((image) => (
-                  <div>
+                  <div key={Math.random()}>
                     <Link to={image.file_url} id="grid-img" key={Math.random()}>
                       <img
                         src={`https://drive.google.com/uc?id=${image.file_id}`}

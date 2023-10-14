@@ -54,7 +54,20 @@ const FileUpload = ({ token }) => {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+
+    // Define the maximum file size in bytes (3MB)
+    const maxFileSize = 3 * 1024 * 1024; // 3MB in bytes
+
+    if (selectedFile && selectedFile.size <= maxFileSize) {
+      // File size is within the allowed limit, set the file
+      console.log(selectedFile.size);
+      setFile(selectedFile);
+    } else {
+      // File size exceeds the limit, handle the error
+      toast.error("File size exceeds the allowed limit (3MB).");
+      // You can also reset the file input to clear the selected file
+      e.target.value = null;
+    }
   };
 
   const handleUpload = () => {
@@ -93,6 +106,7 @@ const FileUpload = ({ token }) => {
         setIsLoading(false);
 
         // Handle any errors that occurred during the request
+        toast.error("Error uploading file");
         console.error("Error uploading file:", error);
       });
   };
