@@ -3,14 +3,14 @@ import "../css/Home.css";
 import { FaUsers } from "react-icons/fa";
 import BarChart from "../components/BarCart";
 import PieChart from "../components/PieChart";
-import { users } from "../data";
+// import { users } from "../data";
 import img from "../images/gb-profile.png";
 import { Link, useNavigate } from "react-router-dom";
 import { BsChatRightText, BsFolder2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineMenu } from "react-icons/ai";
 
-const Home = ({ user, handleShowNav }) => {
+const Home = ({ handleShowNav, user, users }) => {
   const navigate = useNavigate();
   const logoutUser = () => {
     sessionStorage.removeItem("user");
@@ -63,18 +63,20 @@ const Home = ({ user, handleShowNav }) => {
             <PieChart />
           </div>
         </div>
-        <div className="users">
-          <h3>Users</h3>
-          {users.map((x) => (
-            <div className="user" key={Math.random()}>
-              <img src={x.img} alt="" />
-              <div>
-                <span>{x.username}</span>
-                <span>onine</span>
+        {user.role !== "user" && (
+          <div className="users">
+            <h3>Users</h3>
+            {users.map((x) => (
+              <div className="user" key={Math.random()}>
+                <img src={x.img} alt="" />
+                <div>
+                  <span>{x.name}</span>
+                  <span>{x.email}</span>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

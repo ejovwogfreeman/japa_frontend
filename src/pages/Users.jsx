@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "../css/Users.css";
 import { FaSearch } from "react-icons/fa";
 import Search from "../components/Search";
-import { users } from "../data";
-import { AiOutlineCloudUpload, AiOutlineMenu } from "react-icons/ai";
-import Upload from "./FileUpload";
+import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const Users = ({ handleShowNav, users }) => {
@@ -37,7 +35,7 @@ const Users = ({ handleShowNav, users }) => {
           ) : (
             <>
               {users.map((x) => (
-                <Link to={`/user/${Math.random()}`} key={Math.random()}>
+                <Link to={`/user/${x.user_id}`} key={Math.random()}>
                   <img src={x.img} alt="" />
                   <div style={{ marginLeft: "10px" }}>
                     <span className="top">

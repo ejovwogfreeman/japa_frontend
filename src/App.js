@@ -90,7 +90,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
-      .get("https://japaconsults.sammykingx.tech/user", {
+      .get("https://japaconsults.sammykingx.tech/user/allUsers", {
         headers,
       })
       .then((response) => {
@@ -131,7 +131,13 @@ const App = () => {
               <Route element={<ProtectedRoutes />}>
                 <Route
                   path="/"
-                  element={<Home user={user} handleShowNav={handleShowNav} />}
+                  element={
+                    <Home
+                      user={user}
+                      handleShowNav={handleShowNav}
+                      users={users}
+                    />
+                  }
                 />{" "}
               </Route>
               <Route element={<ProtectedRoutes />}>
@@ -195,7 +201,14 @@ const App = () => {
               <Route element={<ProtectedRoutes />}>
                 <Route
                   path="/user/:id"
-                  element={<User handleShowNav={handleShowNav} />}
+                  element={
+                    <User
+                      handleShowNav={handleShowNav}
+                      users={users}
+                      user={user}
+                      token={token}
+                    />
+                  }
                 />
               </Route>
               <Route element={<ProtectedRoutes />}>

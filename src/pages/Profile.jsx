@@ -55,7 +55,7 @@ const Profile = ({ token, handleShowNav, user }) => {
         <span>12/12/2022</span>
       </section>
       <section>
-        <span>Date Joined :</span>
+        <span>Role :</span>
         <span>{user.role}</span>
       </section>
     </div>
